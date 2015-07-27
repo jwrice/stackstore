@@ -13,7 +13,7 @@ var Product = new mongoose.Schema({
 	},
 	categories: [String],
 	instructor: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Instructor',
 		required: true
 	}

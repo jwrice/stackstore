@@ -1,20 +1,21 @@
 'use strict'
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+	schema = mongoose.Schema
 
-var Instructor = new mongoose.Schema({
+var Instructor = new schema({
 	user: {
-		type: ObjectId,
+		type: schema.Types.ObjectId,
 		ref: 'User'
 		required: true
 	},
 	rating: Number,
 	helpedStudents: [{
-		type: String,
+		type: schema.Types.ObjectId,
 		ref: 'User'
 	}],
 	offeredProducts: [{
-		type: String,
+		type: schema.Types.ObjectId,
 		ref: 'Product'
 	}]
 })
