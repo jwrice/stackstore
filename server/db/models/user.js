@@ -1,8 +1,6 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-var Product = require('./product.js');
-var Transaction = require('./transaction.js');
 
 var schema = new mongoose.Schema({
     email: {
