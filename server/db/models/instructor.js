@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var Instructor = new schema({
 	user: {
 		type: schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'User',
 		required: true
 	},
 	rating: Number,
