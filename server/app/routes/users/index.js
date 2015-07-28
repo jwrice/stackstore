@@ -1,5 +1,6 @@
 'use strict';
 var router = require('express').Router();
+var mongoose = require('mongoose');
 module.exports = router;
 var _ = require('lodash');
 var mongoose = require('mongoose');
@@ -9,7 +10,7 @@ router.param('userId', function(req, res, next, userId) {
 	User.findById(userId).populate('cart', 'pastPurchases').exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
-			req.user = user;
+			req.currentUser = user;
 			next();
 		})
 		.then(null, next);
@@ -18,7 +19,7 @@ router.param('userId', function(req, res, next, userId) {
 
 // get all info (even transactions)
 router.get('/:userId', function(req, res, next) {
-	res.json(req.user);
+	res.json(req.currentUser);
 });
 
 
@@ -26,9 +27,14 @@ router.get('/:userId', function(req, res, next) {
 // adding/deleting products to the cart
 // changing info on user account page
 router.put('/:userId', function(req, res, next) {
-	req.user = req.body;
-	req.user.save();
-	res.json(req.user);
+	User.findByIdAndUpdate(req.currentUser._id, req.body, {'new': true})
+	.then(function(user) {
+			if (!user) throw new Error("user not found");
+			req.currentUser = user;
+			res.json(user);
+			next();
+		})
+		.then(null, next);
 });
 
 // sign up
@@ -40,5 +46,3 @@ router.post('/', function(req, res, next) {
 			next(err);
 		})
 });
-
-module.exports = router

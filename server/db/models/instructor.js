@@ -7,8 +7,7 @@ var Instructor = new schema({
 	user: {
 		type: schema.Types.ObjectId,
 		ref: 'User',
-		required: true
-	},
+		required: false	},
 	rating: Number,
 	helpedStudents: [{
 		type: schema.Types.ObjectId,

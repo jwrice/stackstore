@@ -5,51 +5,52 @@ var Product = require('./product.js');
 var Transaction = require('./transaction.js');
 
 var schema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  salt: {
-    type: String
-  },
-  cart: {
-    type: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product"
-      }]
-      // required: true
-  },
-  pastPurchases: {
-    type: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Transaction"
-      }]
-      // required: true
-  },
-  isInstructor: {
-    type: Boolean,
-    required: true
-  },
-  instructor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Instructor"
-  },
-  twitter: {
-    id: String,
-    username: String,
-    token: String,
-    tokenSecret: String
-  },
-  facebook: {
-    id: String
-  },
-  google: {
-    id: String
-  }
+     lastName: {
+        type: String,
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    salt: {
+        type: String,
+        required: true
+    },
+    cart: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product"
+        }]
+        // required: true
+    },
+    pastPurchases: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Transaction"
+        }]
+        // required: true
+    },
+    twitter: {
+        id: String,
+        username: String,
+        token: String,
+        tokenSecret: String
+    },
+    facebook: {
+        id: String
+    },
+    google: {
+        id: String
+    }
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

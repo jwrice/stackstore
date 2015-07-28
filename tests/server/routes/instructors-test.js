@@ -58,7 +58,7 @@ var createUIP = function() {
 		});	
 };
 
-describe('Instructor Routes', function() {
+xdescribe('Instructor Routes', function() {
 
 	beforeEach('Establish DB connection', function(done) {
 		if (mongoose.connection.db) return done();

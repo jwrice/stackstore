@@ -3,7 +3,7 @@
  module.exports = router;
 
 
- router.use('/users', require('./users.js'));
+ router.use('/users', require('./users'));
  router.use('/instructor', require('./instructor'));
  router.use('/products', require('./products'));
 
