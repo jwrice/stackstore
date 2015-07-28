@@ -1,7 +1,9 @@
 // Instantiate all models
 var mongoose = require('mongoose');
 require('../../../server/db/models');
-var User = mongoose.model('User');
+var User = mongoose.model('User'),
+	Product = mongoose.model('Product'),
+	Instructor = mongoose.model('Instructor');
 
 var expect = require('chai').expect;
 
@@ -11,7 +13,7 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var supertest = require('supertest');
 var app = require('../../../server/app');
 
-describe('Members Route', function() {
+describe('Instructor Routes', function() {
 
 	beforeEach('Establish DB connection', function(done) {
 		if (mongoose.connection.db) return done();
