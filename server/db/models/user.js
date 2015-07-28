@@ -14,22 +14,29 @@ var schema = new mongoose.Schema({
         required: true
     },
     salt: {
-        type: String,
-        required: true
+        type: String
     },
     cart: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product"
-        }],
-        required: true
+        }]
+        // required: true
     },
     pastPurchases: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Transaction"
-        }],
+        }]
+        // required: true
+    },
+    isInstructor: {
+        type: Boolean,
         required: true
+    },
+    instructor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Instructor"
     },
     twitter: {
         id: String,
