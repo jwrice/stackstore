@@ -31,6 +31,10 @@ var schema = new mongoose.Schema({
         }],
         required: true
     },
+    instructor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Instructor"
+    },
     twitter: {
         id: String,
         username: String,

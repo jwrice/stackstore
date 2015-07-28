@@ -5,7 +5,7 @@ var _ = require('lodash');
 var User = mongoose.model('User');
 
 router.param('userId', function(req, res, next, userId) {
-	User.findById(userId).populate('cart').populate('pastPurchases').exec()
+	User.findById(userId).populate('cart', 'pastPurchases').exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.user = user;
