@@ -41,7 +41,7 @@ var createUIP = function() {
 		});
 };
 
-describe('Instructor Routes', function() {
+xdescribe('Instructor Routes', function() {
 
 	beforeEach('Establish DB connection', function(done) {
 		if (mongoose.connection.db) return done();
@@ -59,7 +59,7 @@ describe('Instructor Routes', function() {
 			guestAgent = supertest.agent(app);
 		});
 
-		xit('should get with 200 response and with an array as the body', function(done) {
+		it('should get with 200 response and with an array as the body', function(done) {
 			loggedInAgent.get('/api/members/secret-stash').expect(200).end(function(err, response) {
 				if (err) return done(err);
 				expect(response.body).to.be.an('array');
