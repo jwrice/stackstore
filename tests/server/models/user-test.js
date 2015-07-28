@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 // Require in all models.
 require('../../../server/db/models');
 
-var User = mongoose.model('User');
+var User = mongoose.model('User'),
+    testId
 
 describe('User model', function () {
 
@@ -103,7 +104,14 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({
+                    email: 'obama@gmail.com',
+                    password: 'potus',
+                    salt: "whatever",
+                    // cart: [],
+                    // pastPurchases: [],
+                    isInstructor: false
+                });
             };
 
             beforeEach(function () {
@@ -117,11 +125,17 @@ describe('User model', function () {
             });
 
             it('should call User.encryptPassword with the given password and generated salt', function (done) {
-                createUser().then(function () {
+                createUser()
+                .then(function () {
                     var generatedSalt = saltSpy.getCall(0).returnValue;
                     expect(encryptSpy.calledWith('potus', generatedSalt)).to.be.ok;
                     done();
-                });
+                })
+                .then(function(result){
+                    console.log(result)
+                }, function(err){
+                    console.log(err)
+                })
             });
 
             it('should set user.salt to the generated salt', function (done) {
@@ -144,4 +158,64 @@ describe('User model', function () {
 
     });
 
+    describe('basic routing', function () {
+
+        var createUser = function () {
+            return User.create({
+                email: 'obama@gmail.com',
+                password: 'potus',
+                salt: "whatever",
+                // cart: [],
+                // pastPurchases: [],
+                isInstructor: false
+            });
+        };
+
+
+        describe('should get', function () {
+
+            beforeEach(function (done) {
+                createUser()
+                .then(function(result){
+                    console.log(result)
+                    testId = result._id
+                    console.log(testId)
+                    done()
+                }, done);
+            });
+
+            // afterEach('Clear test database', function (done) {
+            //     clearDB(done);
+            // });   
+
+            it('should return the existing users', function(done){
+                console.log('first test', testId)
+                User.find({}).exec()
+                .then(function(users){
+                    expect(users.length).to.be.equal(1);
+                    done();
+                })
+                .then(null, function(err){
+                    console.log(err)
+                    done()
+                })
+            })
+
+            it('should return a user by ID', function(done){
+                console.log('second test', testId)
+                User.findById(testId)
+                .exec()
+                .then(function(user){
+                    expect(user.email).to.be.equal("obama@gmail.com");
+                    done()
+                })
+                .then(null, function(err){
+                    console.log(err)
+                    done()
+                })
+            })
+
+        })
+
+    })
 });

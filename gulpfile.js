@@ -50,7 +50,7 @@ gulp.task('buildJS', ['lintJS'], function () {
 });
 
 gulp.task('testServerJS', function () {
-	return gulp.src('./tests/server/**/*.js', {
+	return gulp.src('./tests/server/models/*.js', {
 		read: false
 	}).pipe(mocha({ reporter: 'spec' }));
 });
