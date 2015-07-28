@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 require('../../../server/db/models');
 
 var User = mongoose.model('User'),
+    Product = mongoose.model('Product'),
+    Instructor = mongoose.model('Instructor'),
     testId
 
 describe('User model', function () {
@@ -171,38 +173,32 @@ describe('User model', function () {
             });
         };
 
-
         describe('should get', function () {
 
             beforeEach(function (done) {
                 createUser()
                 .then(function(result){
-                    console.log(result)
                     testId = result._id
-                    console.log(testId)
                     done()
                 }, done);
             });
 
-            // afterEach('Clear test database', function (done) {
-            //     clearDB(done);
-            // });   
+            afterEach('Clear test database', function (done) {
+                clearDB(done);
+            });   
 
             it('should return the existing users', function(done){
-                console.log('first test', testId)
                 User.find({}).exec()
                 .then(function(users){
                     expect(users.length).to.be.equal(1);
                     done();
                 })
                 .then(null, function(err){
-                    console.log(err)
                     done()
                 })
             })
 
             it('should return a user by ID', function(done){
-                console.log('second test', testId)
                 User.findById(testId)
                 .exec()
                 .then(function(user){
@@ -210,7 +206,61 @@ describe('User model', function () {
                     done()
                 })
                 .then(null, function(err){
-                    console.log(err)
+                    done()
+                })
+            })
+
+            it('should update a user with a new email address', function(done){
+                User.update({
+                    email: 'michelle@gmail.com',
+                    password: 'flotus',
+                    salt: "whatever",
+                    // cart: [],
+                    // pastPurchases: [],
+                    isInstructor: true
+                })
+                .exec()
+                .then(function(user){
+                    expect(user.email).to.be.equal("michelle@gmail.com");
+                    // expect(user.isInstructor).to.be.equal(false);
+                    done()
+                })
+                .then(null, function(err){
+                    done()
+                })
+            })
+
+            it('should update a user with a new product reference within the cart', function(done){
+                User.create({
+                    email: 'biden@gmail.com',
+                    password: 'viceprez',
+                    salt: "whatever",
+                    // cart: [],
+                    // pastPurchases: [],
+                    isInstructor: true
+                }).then(function(user){
+                    return Instructor.create({
+                        user: user._id,
+                        rating: 4,
+                    })
+                }).then(function(instructor){
+                    return Product.create({
+                        title: "Help",
+                        instructor: instructor._id
+                    })
+                }).then(function(product){
+                    return User.findByIdAndUpdate(testId, {
+                            cart: [product._id]
+                        }).populate('cart')
+                })
+                .then(function(user){
+                    expect(user.cart.length).to.be.equal(1);
+                    expect(user.cart[0].title).to.be.equal("Help");
+                    expect(user.cart[0].instructor).to.be.an(objId);
+                    // expect(user.isInstructor).to.be.equal(false);
+                    done()
+                })
+                .then(null, function(err){
                     done()
                 })
             })
