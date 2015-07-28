@@ -5,6 +5,14 @@ var Product = require('./product.js');
 var Transaction = require('./transaction.js');
 
 var schema = new mongoose.Schema({
+     lastName: {
+        type: String,
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
@@ -21,15 +29,15 @@ var schema = new mongoose.Schema({
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product"
-        }],
-        required: true
+        }]
+        // required: true
     },
     pastPurchases: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Transaction"
-        }],
-        required: true
+        }]
+        // required: true
     },
     twitter: {
         id: String,
