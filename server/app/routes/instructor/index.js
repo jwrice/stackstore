@@ -46,9 +46,9 @@ router.put("/:instructorId", function(req, res, next) {
 
 //update the instructor
 router.delete("/:instructorId", function(req, res, next) {
-	Instructor.findByIdAndDelete(req.params.instructorId, req.body)
+	Instructor.findById(req.params.instructorId).exec()
 		.then(function(instructor) {
-			res.json(instructor);
+			instructor.remove();
 		})
 		.then(null, next);
 })
