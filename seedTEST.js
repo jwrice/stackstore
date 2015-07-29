@@ -22,13 +22,13 @@ var User = Promise.promisifyAll(mongoose.model('User'));
 var Instructor = Promise.promisifyAll(mongoose.model('Instructor'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
 
-var numUsers = 5;
-var numIns = 5;
-var numProducts = 5;
+var numUsers = 3;
+var numIns = 3;
+var numProducts = 3;
 var emails = chance.unique(chance.email, 100);
 
 function randUser () {
-    return User.create({
+    return {
         lastName: chance.last(),
         firstName: chance.first(),
         email: emails.pop(),
@@ -36,7 +36,7 @@ function randUser () {
         salt: User.generateSalt(),
         cart: [],
         pastPurchases: []
-    });
+    };
 }
 
 
@@ -46,10 +46,10 @@ function randIns (users) {
         min:1,
         max:5
     })
-    return Instructor.create({
+    return {
         user: user._id,
         rating: rating
-    })
+    }
 }
 
 function randTitle () {
@@ -70,12 +70,12 @@ function randProduct (allIns) {
         min: 15,
         max: 50
     });
-    return Product.create({
+    return {
         title: randTitle(),
         serviceDescription: randTitle(),
         price: price,
         instructor: instructor._id
-    });
+    };
 }
 
 var existingUsers = [];
@@ -83,11 +83,9 @@ var existingUsers = [];
 var seedUsers = function () {
     var users = [];
     for (var i = 0; i < numUsers; i++) {
-        randUser().then(function(user){
-            users.push(user);
-            existingUsers = users;
-        })
+        users.push(randUser());
     };
+    existingUsers = users;
     return User.createAsync(users);
 
 };
@@ -99,11 +97,10 @@ var exitingIns = []
 var seedInstructors = function () {
     var instructors = [];
     for (var i = 0; i < numIns; i++) {
-        randIns(existingUsers).then(function(ins){
-            instructors.push(ins);
-            exitingIns = instructors;
-        })
+        console.log(instructors,"hit ins");
+        instructors.push(randIns(existingUsers));
     };
+    exitingIns = instructors;
 
     return Instructor.createAsync(instructors);
 
@@ -112,9 +109,8 @@ var seedInstructors = function () {
 var seedProducts = function () {
     var products = [];
     for (var i = 0; i < numProducts; i++) {
-        randProduct(exitingIns).then(function(prd){
-            products.push(prd);
-        })
+        console.log(products,"hit prods");
+        products.push(randProduct(exitingIns));
     };
 
     return Product.createAsync(products);
@@ -123,18 +119,14 @@ var seedProducts = function () {
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
         if (users.length === 0) {
-            // seedUsers();
-            // seedInstructors();
-            return seedUsers();
+            seedUsers();
+            seedInstructors();
+            return seedProducts();
             // return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);
         }
-    }).then(function() {
-        return seedInstructors();
-    }).then(function() {
-        return seedProducts();
     }).then(function () {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);
