@@ -13,5 +13,6 @@
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>
         </div>
+        <button ui-sref="profile" ng-show="user" class="btn login-button">Profile</button>
     </div>
 </nav>

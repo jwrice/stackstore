@@ -1,0 +1,16 @@
+<h1>All the products we have right now</h1>
+<select ng-model="category" ng-change="changed(category)">
+	<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
+</select>
+<select ng-model="instructor" ng-change="changed(instructor)">
+	<option value="ALL">ALL</option>
+	<option ng-repeat="instr in instructors" value="{{ instr }}">{{ instr }}<option>
+</select>
+<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && product.instuctor._id === instr._id) || (category==undefined && (instructor==undefined || instructor=='ALL'))">
+	<div class="left">
+		{{ product.title }} is about {{ product.categories[1] }}
+		{{ product.instructor.user }} divide
+		{{ instructors[0].user }}
+	</div>
+	<div class="right"></div>
+</div>
