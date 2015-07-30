@@ -5,7 +5,7 @@
 <select ng-model="insIds" ng-change="choose(insIds)">
 	<option ng-repeat="product in products" value="{{ product.instructor._id }}">{{ product.instructor.user.firstName+" "+product.instructor.user.lastName }}<option>
 </select>
-<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category===undefined && insIds === product.instructor._id) || (insIds === undefined && product.categories.indexOf(category)>(-1) || (category===undefined && insIds === undefined))">
+<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category===undefined && insIds === product.instructor._id) || (insIds === undefined && product.categories.indexOf(category)>(-1) || (category===undefined && insIds === undefined))" ng-click="viewProduct(product.id)">
 	<div class="left">
 		{{ product.title }} of {{ product.categories[1] }} offered by {{ product.instructor.user.firstName + ' ' + product.instructor.user.lastName}}
 	</div>

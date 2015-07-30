@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductsController', function($scope, ProductsFactory, InstructorFactory, $http) {
+app.controller('ProductsController', function($scope, $state, ProductsFactory, InstructorFactory, $http) {
 	$scope.cats = ["ALL", "Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
 		$scope.category = category;
@@ -29,6 +29,12 @@ app.controller('ProductsController', function($scope, ProductsFactory, Instructo
 			$scope.name = user.firstName + user.lastName;
 		})
 		return $scope.name;
+	}
+
+	$scope.viewProduct = function(id) {
+		$state.go('oneProduct', {
+			id: id
+		});
 	}
 });
 
