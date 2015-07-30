@@ -39,7 +39,9 @@ router.put('/:userId', function(req, res, next) {
 
 // sign up
 router.post('/', function(req, res, next) {
-	User.create(req.body)
+	var user = new User(req.body)
+	user.salt = User.generateSalt()
+	user.save()
 		.then(function(user) {
 			res.json(user);
 		}, function(err) {
