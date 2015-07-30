@@ -13,13 +13,12 @@ var transaction = new mongoose.Schema({
     ref: "Product",
     required: true
   },
-  instructor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Instructor",
-    required: true
-  },
   time: {
     type: Date,
+    required: true
+  },
+  price: {
+    type: Number,
     required: true
   }
 });

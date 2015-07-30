@@ -41,15 +41,15 @@ function randUser () {
 }
 
 
-function randIns (users) {
-    var user = chance.pick(users);
+function randIns () {
     var rating = chance.natural({
         min:1,
         max:5
     })
     return Instructor.create({
-        user: user._id,
-        rating: rating
+        fullName: chance.first() + chance.last(),
+        email: emails.pop(),
+        rating: rating,
     })
 }
 
@@ -68,26 +68,28 @@ function randTitle () {
 function randProduct (allIns) {
     var instructor = chance.pick(allIns);
     var price = chance.natural({
-        min: 15,
-        max: 50
+        min: 1000,
+        max: 5000
     });
+    var timeAvailable = chance.natural({
+        min: 30,
+        max: 120
+    })
     return Product.create({
         title: randTitle(),
         serviceDescription: randTitle(),
         price: price,
+        timeAvailable: timeAvailable,
         instructor: instructor._id,
-        categories: ["ALL",chance.pick(categories),chance.pick(categories)]
+        categories: ["ALL",chance.pick(categories)]
     });
 }
-
-var existingUsers = [];
 
 var seedUsers = function () {
     var users = [];
     for (var i = 0; i < numUsers; i++) {
         randUser().then(function(user){
             users.push(user);
-            existingUsers = users;
         })
     };
     return User.createAsync(users);
@@ -96,14 +98,14 @@ var seedUsers = function () {
 
 
 
-var exitingIns = []
+var existingIns = []
 
 var seedInstructors = function () {
     var instructors = [];
     for (var i = 0; i < numIns; i++) {
-        randIns(existingUsers).then(function(ins){
+        randIns().then(function(ins){
             instructors.push(ins);
-            exitingIns = instructors;
+            existingIns = instructors;
         })
     };
 
@@ -114,7 +116,7 @@ var seedInstructors = function () {
 var seedProducts = function () {
     var products = [];
     for (var i = 0; i < numProducts; i++) {
-        randProduct(exitingIns).then(function(prd){
+        randProduct(existingIns).then(function(prd){
             products.push(prd);
         })
     };
@@ -125,10 +127,7 @@ var seedProducts = function () {
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
         if (users.length === 0) {
-            // seedUsers();
-            // seedInstructors();
             return seedUsers();
-            // return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);

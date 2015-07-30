@@ -6,7 +6,6 @@ var Instructor = mongoose.model('Instructor');
 
 router.get('/', function(req, res, next) {
 	Instructor.find({})
-		.populate('user', 'helpedStudents').populate('offeredProducts')
 		.exec()
 		.then(function(instructors) {
 			console.log(instructors)
@@ -22,24 +21,6 @@ router.get('/', function(req, res, next) {
 router.post("/", function(req, res, next) {
 	Instructor.create(req.body)
 		.then(function(instructor) {
-			return Instructor
-			.populate(instructor, {
-				path: 'user'
-			})
-		})
-		.then(function(instructor){
-			return Instructor
-			.populate(instructor, {
-				path: 'helpedStudents'
-			})
-		})
-		.then(function(instructor){
-			return Instructor
-			.populate(instructor, {
-				path: 'offeredProducts'
-			})
-		})
-		.then(function(instructor) {
 			res.json(instructor);
 		})
 		.then(null, next);
@@ -48,10 +29,6 @@ router.post("/", function(req, res, next) {
 router.get("/:instructorId", function(req, res, next) {
 	//A single instructor's page
 	Instructor.findById(req.params.instructorId)
-		.populate('user'
-			// , 'helpedStudents', 'offeredProducts'
-			// , 'helpedStudents').populate('offeredProducts'
-			)
 		.exec()
 		.then(function(instructor) {
 			if (!instructor) throw "This instructor does not exist";
@@ -64,9 +41,7 @@ router.get("/:instructorId", function(req, res, next) {
 
 //update the instructor
 router.put("/:instructorId", function(req, res, next) {
-	console.log('body is:', req.body, "query is:", req.query)
 	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {"new":true})
-		.populate('user', "helpedStudents").populate('offeredProducts')
 		.then(function(instructor) {
 			res.json(instructor);
 		})
