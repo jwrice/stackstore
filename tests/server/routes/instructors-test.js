@@ -13,46 +13,15 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var supertest = require('supertest');
 var app = require('../../../server/app');
 
-var instructorId = ''
-var userEmail = ''
+var instructorId = '';
 var createUIP = function() {
-	return User.create({
-			firstName: "Barack",
-			lastName: "Obama",
+	return Instructor.create({
+			fullName: "Barack Obama",
 			email: 'trobama@gmail.com',
-			password: 'apotus',
-			salt: "whatever",
-			// cart: [],
-			// pastPurchases: [],
-			isInstructor: false
-		})
-		.then(function(user) {
-			return Instructor.create({
-				user: user._id,
-				rating: 4,
-			})
-		})
-		.then(function(instructor) {
-			return Instructor
-				.populate(instructor, {
-					path: 'user'
-				})
-		})
-		.then(function(instructor) {
-			return Instructor
-				.populate(instructor, {
-					path: 'helpedStudents'
-				})
-		})
-		.then(function(instructor) {
-			return Instructor
-				.populate(instructor, {
-					path: 'offeredProducts'
-				})
+			rating:4
 		})
 		.then(function(instructor) {
 			instructorId = instructor._id;
-			//userEmail = instructor.user.email
 			return Product.create({
 				title: "Help",
 				instructor: instructor._id
@@ -87,8 +56,11 @@ describe('Instructor Routes', function() {
 		it('should get with 200 response and with an array as the body', function(done) {
 			guestAgent.get('/api/instructor/').expect(200).end(function(err, res) {
 				if (err) return done(err);
-				expect(res.body).to.be.an('array');
-				done();
+				Instructor.findById(instructorId).exec()
+				.then(function(instructor){
+					expect(res.body.indexOf(instructor)).to.not.equal(-1);
+					done();
+				})
 			});
 		});
 

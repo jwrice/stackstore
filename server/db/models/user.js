@@ -30,14 +30,12 @@ var schema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Product"
         }]
-        // required: true
     },
     pastPurchases: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Transaction"
         }]
-        // required: true
     },
     twitter: {
         id: String,

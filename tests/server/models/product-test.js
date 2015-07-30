@@ -22,10 +22,6 @@ describe('Product model', function () {
         clearDB(done);
     });
 
-    it('should exist', function () {
-        expect(Product).to.be.a('function');
-    });
-
 
     describe('on creation', function () {
         var createInstructor = function (){
