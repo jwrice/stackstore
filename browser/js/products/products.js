@@ -7,18 +7,27 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProductsController', function ($scope, $http) {
+app.controller('ProductsController', function ($scope, ProductsFactory ,InstructorFactory,$http) {
 	$scope.cats = ["ALL","Python","Java","JavaScript","Ruby","Objective-C"];
 	$scope.changed = function(category){
 		$scope.category = category;
 	}
-	$http.get('/api/products/')
-	.success(function (products){
+	ProductsFactory.getProducts().then(function(products){
 		$scope.products = products;
 	})
-	$http.get('/api/instructor/')
-	.success(function (instructors){
-		$scope.instructors = instructors;
-		console.log(instructors,"this is in the controller");
+
+	InstructorFactory.getInstructors().then(function(instr){
+		$scope.instructors = instr;
 	})
+	
+	$scope.choose = function(ins){
+		$scope.insIds = ins;
+	}
+
+	$scope.getUser = function(id){
+		$http.get('api/users/'+id).then(function(user){
+			$scope.name = user.firstName + user.lastName;
+		})
+		return $scope.name;
+	}
 });

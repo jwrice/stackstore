@@ -7,7 +7,7 @@ var Instructor = mongoose.model('Instructor');
 
 router.get('/', function(req, res, next) {
 	Product.find({})
-		.populate('instructor')
+		.populate('instructor','user')
 		.exec()
 		.then(function(products) {
 			if (!products) throw "Error retrieving products";

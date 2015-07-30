@@ -2,15 +2,14 @@
 <select ng-model="category" ng-change="changed(category)">
 	<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
 </select>
-<select ng-model="instructor" ng-change="changed(instructor)">
-	<option value="ALL">ALL</option>
-	<option ng-repeat="instr in instructors" value="{{ instr }}">{{ instr }}<option>
+<select ng-model="insIds" ng-change="choose(insIds)">
+	<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr._id }}<option>
 </select>
-<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && product.instuctor._id === instr._id) || (category==undefined && (instructor==undefined || instructor=='ALL'))">
+<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category===undefined && insIds === product.instructor._id) || (insIds === undefined && product.categories.indexOf(category)>(-1) || (category===undefined && insIds === undefined))">
 	<div class="left">
-		{{ product.title }} is about {{ product.categories[1] }}
-		{{ product.instructor.user }} divide
-		{{ instructors[0].user }}
+		{{ product.title }} of {{ product.categories[1] }} offered by {{ product.instructor.user }}
 	</div>
-	<div class="right"></div>
+	<div class="right">
+		<button>Add to Cart</button>
+	</div>
 </div>
