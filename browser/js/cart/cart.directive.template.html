@@ -1,0 +1,6 @@
+<div ng-controller="CartCtrl">
+	<div ng-repeat="product in user.cart">
+	{{product}}
+	<button ng-click="delete(product)">Delete</button>
+	</div>
+</div>
