@@ -24,4 +24,8 @@ var transaction = new mongoose.Schema({
   }
 });
 
+//allows deep population //see github docs for usage
+var deepPopulate = require('mongoose-deep-populate');
+transaction.plugin(deepPopulate, {});
+
 mongoose.model("Transaction", transaction);

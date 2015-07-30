@@ -84,4 +84,8 @@ schema.method('correctPassword', function(candidatePassword) {
   return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 
+//allows deep population //see github docs for usage
+var deepPopulate = require('mongoose-deep-populate');
+schema.plugin(deepPopulate, {});
+
 mongoose.model('User', schema);
