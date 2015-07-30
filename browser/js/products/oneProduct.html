@@ -1,20 +1,23 @@
-<div id="productInfo">
-  <h1>{{product.title}}</h1>
-  <h2 style="float:right;">{{product.price}}</h2>
-  <br>
+<div id="productInfo" style="padding: 20px 20px;">
+  <h1 style="display:inline-block;">{{product.title}}</h1>
+  <div style="float:right;padding-top: 50px">
+    <button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button>
+    <br>
+    <h2>Price: ${{product.price/100}} </h2>
+  </div>
   <h3>
-    <label ng-repeat="cat in product.categories">{{category}}   </label>
+    <label ng-repeat="cat in product.categories">{{cat}}    </label>
   </h3>
-  <br>
   <h3>{{product.serviceDescription}}</h3>
-  <br>
-  <h3>Time: {{product.timeAvailable}}</h3>
-  <br>
+  <h3>Time:   {{time.hours}}h {{time.minutes}}m </h3>
 </div>
-<button id="addToCart"></button>
-<div id="instructorInfo">
-  <img id="profilePic" src="jimmy.png"/>
-  <h4>{{product.instructor.fullName}}</h4>
-  <h2>{{product.instructor.email}}</h2>
-  <img id="stars" src="/imgs/{{product.instructor.rating}}Star.png"/>
+
+<div id="instructorInfo" style="background-color: #ccc; border-radius:20px;">
+  <img id="profilePic" src="/imgs/jimmy.jpg" style="width:200px; height:200px; padding: 20px 20px;">
+  <img id="stars" src="/imgs/{{product.instructor.rating}}Stars.png" style="float: right; padding: 20px 20px;">
+  <div style="display:inline-block;">
+    <h2 style="display:inline-block;">{{product.instructor.fullName}}</h2>
+    <br>
+    <h4 style="display:inline-block;">{{product.instructor.email}}</h4>
+  </div>  
 </div>

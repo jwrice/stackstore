@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('ProductsController', function($scope, $state, ProductsFactory, InstructorFactory, $http) {
-	$scope.cats = ["ALL", "Python", "Java", "JavaScript", "Ruby", "Objective-C"];
+	$scope.cats = ["Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
 		$scope.category = category;
 	}
@@ -32,12 +32,17 @@ app.controller('ProductsController', function($scope, $state, ProductsFactory, I
 	}
 
 	$scope.viewProduct = function(id) {
+		console.log(id);
 		$state.go('oneProduct', {
 			id: id
 		});
 	}
+
+	$scope.insIds = "ALL";
+	$scope.category = "ALL";
 });
 
+//state and controller for oneProduct page
 app.config(function($stateProvider) {
 	$stateProvider.state('oneProduct', {
 		url: '/products/:id',
@@ -47,9 +52,13 @@ app.config(function($stateProvider) {
 });
 
 app.controller('OneProductController', function($scope, ProductsFactory, $stateParams) {
-
+	console.log($stateParams);
 	ProductsFactory.getProduct($stateParams.id).then(function(product) {
 		$scope.product = product;
+		$scope.time = {
+			hours: Math.floor(product.timeAvailable / 60),
+			minutes: product.timeAvailable % 60
+		}
 	})
 
 	$scope.addToCart = function() {

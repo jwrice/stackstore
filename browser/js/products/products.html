@@ -1,13 +1,15 @@
 <h1>All the products we have right now</h1>
 <select ng-model="category" ng-change="changed(category)">
+	<option value="ALL">ALL</option>
 	<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
 </select>
 <select ng-model="insIds" ng-change="choose(insIds)">
-	<option ng-repeat="product in products" value="{{ product.instructor._id }}">{{ product.instructor.user.firstName+" "+product.instructor.user.lastName }}<option>
+	<option value="ALL">ALL</option>
+	<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}<option>
 </select>
-<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category===undefined && insIds === product.instructor._id) || (insIds === undefined && product.categories.indexOf(category)>(-1) || (category===undefined && insIds === undefined))" ng-click="viewProduct(product.id)">
+<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))"  ng-click="viewProduct(product._id)">
 	<div class="left">
-		{{ product.title }} of {{ product.categories[1] }} offered by {{ product.instructor.user.firstName + ' ' + product.instructor.user.lastName}}
+		{{ product.title }} of {{ product.categories[0]  }} offered by {{ product.instructor.fullName }}
 	</div>
 	<div class="right">
 		<button>Add to Cart</button>
