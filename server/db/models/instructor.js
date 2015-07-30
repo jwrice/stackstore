@@ -19,4 +19,8 @@ var Instructor = new schema({
 	}]
 })
 
+//allows deep population //see github docs for usage
+var deepPopulate = require('mongoose-deep-populate');
+Instructor.plugin(deepPopulate, {});
+
 mongoose.model('Instructor', Instructor);

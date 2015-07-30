@@ -1,0 +1,26 @@
+.prdtli{
+	border: 2px solid black;
+	border-radius: 20px;
+	margin: 1%;
+	padding-bottom: 1%;
+}
+
+.prdtli:hover {
+	box-shadow: 10px 10px 5px grey;
+}
+
+.left {
+	display: inline-block;
+	margin-left: 1%;
+}
+
+.right {
+	float: right;
+	display: inline-block;
+}
+
+button {
+	border-radius: 10px;
+	background-color: #3399FF;
+}
+

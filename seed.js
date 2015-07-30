@@ -22,10 +22,11 @@ var User = Promise.promisifyAll(mongoose.model('User'));
 var Instructor = Promise.promisifyAll(mongoose.model('Instructor'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
 
-var numUsers = 5;
-var numIns = 5;
-var numProducts = 5;
+var numUsers = 10;
+var numIns = 10;
+var numProducts = 20;
 var emails = chance.unique(chance.email, 100);
+var categories = ["JavaScript","Java","Python","C++","Ruby","Objective-C"];
 
 function randUser () {
     return User.create({
@@ -74,7 +75,8 @@ function randProduct (allIns) {
         title: randTitle(),
         serviceDescription: randTitle(),
         price: price,
-        instructor: instructor._id
+        instructor: instructor._id,
+        categories: ["ALL",chance.pick(categories),chance.pick(categories)]
     });
 }
 
