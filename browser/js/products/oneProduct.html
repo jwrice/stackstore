@@ -1,0 +1,20 @@
+<div id="productInfo">
+  <h1>{{product.title}}</h1>
+  <h2 style="float:right;">{{product.price}}</h2>
+  <br>
+  <h3>
+    <label ng-repeat="cat in product.categories">{{category}}   </label>
+  </h3>
+  <br>
+  <h3>{{product.serviceDescription}}</h3>
+  <br>
+  <h3>Time: {{product.timeAvailable}}</h3>
+  <br>
+</div>
+<button id="addToCart"></button>
+<div id="instructorInfo">
+  <img id="profilePic" src="jimmy.png"/>
+  <h4>{{product.instructor.fullName}}</h4>
+  <h2>{{product.instructor.email}}</h2>
+  <img id="stars" src="/imgs/{{product.instructor.rating}}Star.png"/>
+</div>

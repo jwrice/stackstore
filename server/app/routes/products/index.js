@@ -54,7 +54,7 @@ router.post("/:instructorId", function(req, res, next) {
 
 router.get('/:productId', function(req, res, next) {
 	Product.findById(req.params.productId)
-		.deepPopulate('instructor instructor.user')
+		.populate('instructor')
 		.exec()
 		.then(function(product) {
 			if (!product) throw "Product not found";
@@ -67,7 +67,9 @@ router.get('/:productId', function(req, res, next) {
 
 //update a product
 router.put("/:productId", function(req, res, next) {
-	Product.findByIdAndUpdate(req.params.productId, req.body,{'new': true}).exec()
+	Product.findByIdAndUpdate(req.params.productId, req.body, {
+			'new': true
+		}).exec()
 		.deepPopulate('instructor instructor.user')
 		.then(function(product) {
 			res.json(product);
@@ -81,7 +83,9 @@ router.delete("/:productId", function(req, res, next) {
 	Product.findById(req.params.productId).exec()
 		.then(function(product) {
 			product.remove();
-			res.json({message: "deleted"});
+			res.json({
+				message: "deleted"
+			});
 		})
 		.then(null, next);
 })
