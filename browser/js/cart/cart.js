@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider
     .state('cart', {
-        url: '/users/:userId',
+        url: '/users/:userId/cart',
         templateUrl: 'js/cart/cart.html',
         controller: 'CartCtrl'
     })
@@ -14,4 +14,6 @@ app.controller('CartCtrl', function($scope, $state, CartFactory, $stateParams) {
         console.log('user cart is', cart)
         $scope.cart = cart
     })
+
+
 })

@@ -44,11 +44,7 @@ describe('Products Route', function () {
 				title: "JavaScript tutoring",
 				serviceDescription: "I am a good tutor and I will make you a good student",
 				price: 10000,
-				timeAvailable: {
-					date: "Today",
-					startTime: "now",
-					duration: 10
-				},
+				timeAvailable: 60,
 				categories: ["God"]
 			}).then(function(data){
 				prd_id = data._id;
