@@ -1,0 +1,6 @@
+<div>
+<p ng-repeat="instructor in instructors">
+	{{instructor}}
+	<button ui-sref="singleInstructor({instructorId: instructor._id})">go to the tutor profile for {{instructor._id}}</button>
+</p>
+</div>

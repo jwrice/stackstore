@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 		.populate('user', 'helpedStudents').populate('offeredProducts')
 		.exec()
 		.then(function(instructors) {
+			console.log(instructors)
 			if (!instructors) throw "Error retrieving instructors";
 			else {
 				res.json(instructors);
@@ -47,7 +48,10 @@ router.post("/", function(req, res, next) {
 router.get("/:instructorId", function(req, res, next) {
 	//A single instructor's page
 	Instructor.findById(req.params.instructorId)
-		.populate('user', 'helpedStudents').populate('offeredProducts')
+		.populate('user'
+			// , 'helpedStudents', 'offeredProducts'
+			// , 'helpedStudents').populate('offeredProducts'
+			)
 		.exec()
 		.then(function(instructor) {
 			if (!instructor) throw "This instructor does not exist";
