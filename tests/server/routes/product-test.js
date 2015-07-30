@@ -38,6 +38,8 @@ describe('Products Route', function () {
 			}).then(function(data){
 				ins_id = data._id;
 			})
+
+		
 			return Product.create({
 				title: "JavaScript tutoring",
 				serviceDescription: "I am a good tutor and I will make you a good student",
