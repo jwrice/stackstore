@@ -1,10 +1,9 @@
 app.config(function ($stateProvider) {
     $stateProvider
     .state('profile', {
-        url: '/users/profile',
+        url: '/user/user/profile',
         templateUrl: 'js/profile/profile.html',
         controller: 'ProfileCtrl'
-        
     })
 });
 
