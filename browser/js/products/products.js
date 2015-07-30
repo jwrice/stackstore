@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ProductsController', function ($scope, ProductsFactory ,InstructorFactory,$http) {
-	$scope.cats = ["ALL","Python","Java","JavaScript","Ruby","Objective-C"];
+	$scope.cats = ["Python","Java","JavaScript","Ruby","Objective-C"];
 	$scope.changed = function(category){
 		$scope.category = category;
 	}
@@ -24,10 +24,6 @@ app.controller('ProductsController', function ($scope, ProductsFactory ,Instruct
 		$scope.insIds = ins;
 	}
 
-	$scope.getUser = function(id){
-		$http.get('api/users/'+id).then(function(user){
-			$scope.name = user.firstName + user.lastName;
-		})
-		return $scope.name;
-	}
+	$scope.insIds = "ALL";
+	$scope.category = "ALL";
 });
