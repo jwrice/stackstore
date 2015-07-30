@@ -26,4 +26,5 @@ app.controller('ProductsController', function ($scope, ProductsFactory ,Instruct
 
 	$scope.insIds = "ALL";
 	$scope.category = "ALL";
+
 });

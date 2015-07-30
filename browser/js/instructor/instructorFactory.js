@@ -4,6 +4,7 @@ app.factory('InstructorFactory', function ($http) {
 
 			return $http.get('/api/instructor')
 			.then(function (response){
+				console.log(response.data);
 				return response.data
 			})
 		},
@@ -11,7 +12,6 @@ app.factory('InstructorFactory', function ($http) {
 			console.log('instrcId', instructorId)
 			return $http.get('/api/instructor/' + instructorId)
 			.then(function (response){
-				console.log('response.data:', response.data)
 				return response.data
 			})
 		}
