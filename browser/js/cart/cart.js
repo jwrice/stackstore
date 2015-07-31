@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider
     .state('cart', {
-        url: '/users/:userId/cart',
+        url: '/cart',
         templateUrl: 'js/cart/cart.html',
         controller: 'CartCtrl'
     })
