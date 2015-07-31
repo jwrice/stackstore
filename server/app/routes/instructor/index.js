@@ -39,6 +39,16 @@ router.get("/:instructorId", function(req, res, next) {
 		.then(null, next);
 })
 
+// change rating of instructor after transaction by user
+router.put('/:instructorId/rating', function (req,res,next) {
+    Instructor.findById(req.params.instructorId).exec()
+    .then(function (instructor) {
+        instructor.makeAverage(req.body.number);
+        res.json(instructor);
+    })
+    .then(null,next)
+})
+
 //update the instructor
 router.put("/:instructorId", function(req, res, next) {
 	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {"new":true})
