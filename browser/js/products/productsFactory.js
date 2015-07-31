@@ -11,6 +11,12 @@ app.factory('ProductsFactory', function($http) {
         .then(function(res) {
           return res.data;
         })
+    },
+    getInstructorProducts: function(instructorId) {
+      return $http.get('/api/products/instructorProducts/' + instructorId)
+        .then(function(res) {
+          return res.data;
+        })
     }
   }
 })
