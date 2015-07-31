@@ -1,6 +1,16 @@
 #home {
+  .divClass {
+    display: inline-block;
+    float:left;
+    margin-right:20px; 
+    height:600px;
+    overflow: hidden;
+  }
+  .divClass2 {
+    display: inline-block;
+    float:left;
+  }
   fullstack-logo {
-    padding-top: 30px;
     width: 150px;
     margin: 0 auto;
   }
@@ -8,5 +18,22 @@
     margin-top: 40px;
     text-align: center;
   }
+}
+
+.slide.ng-hide-add,
+.slide.ng-hide-remove {
+  -webkit-transition: all linear 0.5s;
+  -moz-transition: all linear 0.5s;
+  -o-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+  display: block!important;
+}
+.slide.ng-hide-add.ng-hide-add-active,
+.slide.ng-hide-remove {
+  opacity: 0;
+}
+.slide.ng-hide-add,
+.slide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
 }
 
