@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider
     .state('cart', {
-        url: '/users/:userId/cart',
+        url: '/users/cart',
         templateUrl: 'js/cart/cart.html',
         controller: 'CartCtrl'
     })
@@ -12,14 +12,26 @@ app.config(function ($stateProvider) {
     })
 });
 
-app.controller('CartCtrl', function($scope, $state, CartFactory, $stateParams) {
+app.controller('CartCtrl', function($scope, $state, CartFactory) {
 
-    CartFactory.getCart($stateParams.userId)
+    CartFactory.getUser().then(function(user){
+        $scope.user = user
+    })
+    console.log($scope.user)
+
+    CartFactory.getCart($scope.user._id)
     .then(function(cart){
         console.log('user cart is', cart)
         $scope.cart = cart
     })
 
+    $scope.submit = function (product) {
+        CartFactory.addProduct($scope.user, product)
+        .then(function(user){
+            console.log(user)
+            $scope.user = user
+        })
+    }
 
 });
 

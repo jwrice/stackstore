@@ -7,11 +7,17 @@
 	<option value="ALL">ALL</option>
 	<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}<option>
 </select>
-<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))"  ng-click="viewProduct(product._id)">
+<div class="prdtli"
+	ng-repeat="product in products" 
+	ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))"
+	ng-click="viewProduct(product._id)">
 	<div class="left">
 		{{ product.title }} of {{ product.categories[0]  }} offered by {{ product.instructor.fullName }}
 	</div>
 	<div class="right" ng-controller="GuestCartCtrl">
-		<button ng-click="submit(product)">Add to Cart</button>
+		<button ng-click="submit(product)" ng-if="!user">Add to Guest Cart</button>
+	</div>
+	<div class="right" ng-controller="CartCtrl">
+		<button ng-click="submit(product)" ng-if="!!user">Add to User Cart</button>
 	</div>
 </div>
