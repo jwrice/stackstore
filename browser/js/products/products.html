@@ -11,7 +11,7 @@
 	<div class="left">
 		{{ product.title }} of {{ product.categories[0]  }} offered by {{ product.instructor.fullName }}
 	</div>
-	<div class="right">
-		<button>Add to Cart</button>
+	<div class="right" ng-controller="GuestCartCtrl">
+		<button ng-click="submit(product)">Add to Cart</button>
 	</div>
 </div>

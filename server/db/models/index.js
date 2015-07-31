@@ -5,3 +5,4 @@ require('./user.js');
 require('./transaction.js');
 require('./product.js');
 require('./instructor.js');
+require('./cart.js');

@@ -35,8 +35,8 @@ function randUser() {
         email: emails.pop(),
         password: chance.word(),
         salt: User.generateSalt(),
-        cart: [],
-        pastPurchases: []
+        cart: [chance.pick(existingPds)._id],
+        pastPurchases: [chance.pick(existingPds)._id]
     });
 }
 
@@ -47,7 +47,7 @@ function randIns() {
         max: 5
     })
     return Instructor.create({
-        fullName: chance.first() + chance.last(),
+        fullName: chance.first() + ' ' + chance.last(),
         email: emails.pop(),
         rating: rating,
     })
@@ -115,11 +115,14 @@ var seedInstructors = function() {
 
 };
 
+var existingPds = [];
+
 var seedProducts = function() {
     var products = [];
     for (var i = 0; i < numProducts; i++) {
         randProduct(existingIns).then(function(prd) {
             products.push(prd);
+            existingPds = products;
         })
     };
 
@@ -129,15 +132,15 @@ var seedProducts = function() {
 connectToDb.then(function() {
     User.findAsync({}).then(function(users) {
         if (users.length === 0) {
-            return seedUsers();
+            return seedInstructors();
         } else {
-            console.log(chalk.magenta('Seems to already be user data, exiting!'));
+            console.log(chalk.magenta('Seems to already be instructor data, exiting!'));
             process.kill(0);
         }
     }).then(function() {
-        return seedInstructors();
-    }).then(function() {
         return seedProducts();
+    }).then(function() {
+        return seedUsers();
     }).then(function() {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);
