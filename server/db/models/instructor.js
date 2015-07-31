@@ -1,16 +1,21 @@
 'use strict'
 
 var mongoose = require('mongoose'),
-	schema = mongoose.Schema
+    schema = mongoose.Schema
 
 var Instructor = new schema({
-	fullName : {type: String, required: true},
-	email: {type: String, required: true},
-	rating: Number
+    fullName : {type: String, required: true},
+    email: {type: String, required: true},
+    rating: {
+        numOfRat: Number,
+        ratingsAverage: Number
+    }
 })
 
-// //allows deep population //see github docs for usage
-// var deepPopulate = require('mongoose-deep-populate');
-// Instructor.plugin(deepPopulate, {});
+
+Instructor.methods.makeAverage = function (number) {
+    this.ratingsAverage = (this.numOfRat*this.ratingsAverage + number)/(this.numOfRat + 1)
+    this.numOfRat++;
+}
 
 mongoose.model('Instructor', Instructor);
