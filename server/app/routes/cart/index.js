@@ -4,6 +4,7 @@ module.exports = router;
 var mongoose = require('mongoose');
 var Cart = mongoose.model('Cart');
 var Product = mongoose.model('Product');
+var Instructor = mongoose.model('Instructor');
 
 
 router.get("/:cartId", function(req, res, next) {

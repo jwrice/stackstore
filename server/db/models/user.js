@@ -28,7 +28,7 @@ var schema = new mongoose.Schema({
     cart: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Product"
+            ref: 'Product'
         }]
     },
     pastPurchases: {
