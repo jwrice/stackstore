@@ -29,6 +29,15 @@ router.post("/:instructorId", function(req, res, next) {
 		.then(null, next);
 })
 
+router.get("/instructorProducts/:instructorId", function(req, res, next) {
+	Product.find({
+			instructor: req.params.instructorId
+		}).exec()
+		.then(function(products) {
+			res.json(products);
+		})
+})
+
 
 router.get('/:productId', function(req, res, next) {
 	Product.findById(req.params.productId)

@@ -1,17 +1,24 @@
-<h1>All the products we have right now</h1>
-<select ng-model="category" ng-change="changed(category)">
-	<option value="ALL">ALL</option>
-	<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
-</select>
-<select ng-model="insIds" ng-change="choose(insIds)">
-	<option value="ALL">ALL</option>
-	<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}<option>
-</select>
-<div class="prdtli" ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))"  ng-click="viewProduct(product._id)">
-	<div class="left">
-		{{ product.title }} of {{ product.categories[0]  }} offered by {{ product.instructor.fullName }}
+<h1>Products</h1>
+<div style="text-align:center">
+	<label>Category:</label>    <select ng-model="category" ng-change="changed(category)">
+		<option value="ALL">ALL</option>
+		<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
+	</select>     
+	<label>Instructor:</label>    <select ng-model="insIds" ng-change="choose(insIds)">
+		<option value="ALL">ALL</option>
+		<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}<option>
+	</select>
+</div>
+<div id="product" class="prdtli" ng-repeat="product in products" style="margin: 10px 10px; padding: 20px 20px; background-color: #ddd; border-radius:20px;" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))" ng-click="viewProduct(product._id)">
+	<h2 style="display:inline-block;">{{product.title}}</h2>
+	<div style="float:right; padding-top: 50px">
+		<button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-click="submit(product); $event.stopPropagation();">Add to Cart</button>
+		<br>
+		<h3>Price: ${{product.price/100}} </h3>
 	</div>
-	<div class="right" ng-controller="GuestCartCtrl">
-		<button ng-click="submit(product)">Add to Cart</button>
-	</div>
+	<h4>
+		<label ng-repeat="cat in product.categories">{{cat}}    </label>
+	</h4>
+	<h4>{{product.serviceDescription}}</h4>
+	<h4>Time:   {{time.hours}}h {{time.minutes}}m </h4>
 </div>

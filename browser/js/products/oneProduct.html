@@ -1,4 +1,4 @@
-<div id="productInfo" style="padding: 20px 20px;">
+<div id="productInfo" style="background-color: #ddd; border-radius:20px; padding: 20px 20px;">
   <h1 style="display:inline-block;">{{product.title}}</h1>
   <div style="float:right;padding-top: 50px">
     <button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button>
@@ -10,14 +10,14 @@
   </h3>
   <h3>{{product.serviceDescription}}</h3>
   <h3>Time:   {{time.hours}}h {{time.minutes}}m </h3>
-</div>
-
-<div id="instructorInfo" style="background-color: #ccc; border-radius:20px;">
-  <img id="profilePic" src="/imgs/jimmy.jpg" style="width:200px; height:200px; padding: 20px 20px;">
-  <img id="stars" src="/imgs/{{product.instructor.rating}}Stars.png" style="float: right; padding: 20px 20px;">
-  <div style="display:inline-block;">
-    <h2 style="display:inline-block;">{{product.instructor.fullName}}</h2>
-    <br>
-    <h4 style="display:inline-block;">{{product.instructor.email}}</h4>
-  </div>  
+  <br>
+  <div id="instructorInfo" style="margin:10px 10px; background-color: #bbb; border-radius:20px;">
+    <img id="profilePic" src="/imgs/jimmy.jpg" style="width:200px; height:200px; padding: 20px 20px;">
+    <img id="stars" src="/imgs/{{product.instructor.rating}}Stars.png" style="float: right; padding: 20px 20px;">
+    <div style="display:inline-block;">
+      <h2 style="display:inline-block;">{{product.instructor.fullName}}</h2>
+      <br>
+      <h4 style="display:inline-block;">{{product.instructor.email}}</h4>
+    </div>  
+  </div>
 </div>
