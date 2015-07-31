@@ -26,9 +26,9 @@ var numUsers = 10;
 var numIns = 10;
 var numProducts = 20;
 var emails = chance.unique(chance.email, 100);
-var categories = ["JavaScript","Java","Python","C++","Ruby","Objective-C"];
+var categories = ["JavaScript", "Java", "Python", "C++", "Ruby", "Objective-C"];
 
-function randUser () {
+function randUser() {
     return User.create({
         lastName: chance.last(),
         firstName: chance.first(),
@@ -41,10 +41,10 @@ function randUser () {
 }
 
 
-function randIns () {
+function randIns() {
     var rating = chance.natural({
-        min:1,
-        max:5
+        min: 1,
+        max: 5
     })
     return Instructor.create({
         fullName: chance.first() + ' ' + chance.last(),
@@ -53,19 +53,21 @@ function randIns () {
     })
 }
 
-function randTitle () {
+function randTitle() {
     var numWords = chance.natural({
         min: 1,
         max: 8
     });
-    return chance.sentence({words: numWords})
-    .replace(/\b\w/g, function (m) {
-        return m.toUpperCase();
-    })
-    .slice(0, -1);
+    return chance.sentence({
+            words: numWords
+        })
+        .replace(/\b\w/g, function(m) {
+            return m.toUpperCase();
+        })
+        .slice(0, -1);
 }
 
-function randProduct (allIns) {
+function randProduct(allIns) {
     var instructor = chance.pick(allIns);
     var price = chance.natural({
         min: 1000,
@@ -81,14 +83,14 @@ function randProduct (allIns) {
         price: price,
         timeAvailable: timeAvailable,
         instructor: instructor._id,
-        categories: ["ALL",chance.pick(categories)]
+        categories: [chance.pick(categories)]
     });
 }
 
-var seedUsers = function () {
+var seedUsers = function() {
     var users = [];
     for (var i = 0; i < numUsers; i++) {
-        randUser().then(function(user){
+        randUser().then(function(user) {
             users.push(user);
         })
     };
@@ -100,10 +102,10 @@ var seedUsers = function () {
 
 var existingIns = []
 
-var seedInstructors = function () {
+var seedInstructors = function() {
     var instructors = [];
     for (var i = 0; i < numIns; i++) {
-        randIns().then(function(ins){
+        randIns().then(function(ins) {
             instructors.push(ins);
             existingIns = instructors;
         })
@@ -115,10 +117,10 @@ var seedInstructors = function () {
 
 var existingPds = [];
 
-var seedProducts = function () {
+var seedProducts = function() {
     var products = [];
     for (var i = 0; i < numProducts; i++) {
-        randProduct(existingIns).then(function(prd){
+        randProduct(existingIns).then(function(prd) {
             products.push(prd);
             existingPds = products;
         })
@@ -127,8 +129,8 @@ var seedProducts = function () {
     return Product.createAsync(products);
 }
 
-connectToDb.then(function () {
-    User.findAsync({}).then(function (users) {
+connectToDb.then(function() {
+    User.findAsync({}).then(function(users) {
         if (users.length === 0) {
             return seedInstructors();
         } else {
@@ -139,10 +141,10 @@ connectToDb.then(function () {
         return seedProducts();
     }).then(function() {
         return seedUsers();
-    }).then(function () {
+    }).then(function() {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);
-    }).catch(function (err) {
+    }).catch(function(err) {
         console.error(err);
         process.kill(1);
     });

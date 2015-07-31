@@ -45,7 +45,9 @@ router.get('/:productId', function(req, res, next) {
 
 //update a product
 router.put("/:productId", function(req, res, next) {
-	Product.findByIdAndUpdate(req.params.productId, req.body,{'new': true}).exec()
+	Product.findByIdAndUpdate(req.params.productId, req.body, {
+			'new': true
+		}).exec()
 		.populate('instructor')
 		.then(function(product) {
 			res.json(product);
@@ -59,7 +61,9 @@ router.delete("/:productId", function(req, res, next) {
 	Product.findById(req.params.productId).exec()
 		.then(function(product) {
 			product.remove();
-			res.json({message: "deleted"});
+			res.json({
+				message: "deleted"
+			});
 		})
 		.then(null, next);
 })
