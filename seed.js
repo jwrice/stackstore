@@ -28,15 +28,15 @@ var numProducts = 20;
 var emails = chance.unique(chance.email, 100);
 var categories = ["JavaScript","Java","Python","C++","Ruby","Objective-C"];
 
-function randUser () {
+function randUser (pds) {
    return User.create({
        lastName: chance.last(),
        firstName: chance.first(),
        email: emails.pop(),
        password: chance.word(),
        salt: User.generateSalt(),
-       cart: [chance.pick(existingPds)._id],
-       pastPurchases: [chance.pick(existingPds)._id]
+       cart: [chance.pick(pds)._id],
+       pastPurchases: [chance.pick(pds)._id]
    });
 }
 
@@ -92,16 +92,6 @@ function randProduct (allIns) {
    });
 }
 
-var seedUsers = function () {
-   var users = [];
-   for (var i = 0; i < numUsers; i++) {
-       randUser().then(function(user){
-           users.push(user);
-       })
-   };
-   return User.createAsync(users);
-
-};
 
 
 var existingIns = []
@@ -132,6 +122,16 @@ var seedProducts = function () {
 
    return Product.createAsync(products);
 }
+var seedUsers = function () {
+   var users = [];
+   for (var i = 0; i < numUsers; i++) {
+       randUser(existingPds).then(function(user){
+           users.push(user);
+       })
+   };
+   return User.createAsync(users);
+
+};
 
 connectToDb.then(function () {
    User.findAsync({}).then(function (users) {
