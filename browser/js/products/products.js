@@ -52,7 +52,6 @@ app.config(function($stateProvider) {
 });
 
 app.controller('OneProductController', function($scope, ProductsFactory, $stateParams) {
-	console.log($stateParams);
 	ProductsFactory.getProduct($stateParams.id).then(function(product) {
 		$scope.product = product;
 		$scope.time = {
