@@ -11,8 +11,13 @@
 </div>
 <div id="product" class="prdtli" ng-repeat="product in products" style="margin: 10px 10px; padding: 20px 20px; background-color: #ddd; border-radius:20px;" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))" ng-click="viewProduct(product._id)">
 	<h2 style="display:inline-block;">{{product.title}}</h2>
-	<div style="float:right; padding-top: 50px" ng-controller="GuestCartCtrl">
-		<button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-click="submit(product); $event.stopPropagation();">Add to Cart</button>
+	<div style="float:right; padding-top: 50px">
+		<div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-controller="GuestCartCtrl">
+			<button ng-click="submit(product); $event.stopPropagation()" ng-if="!user">Add to Guest Cart</button>
+		</div>
+		<div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-controller="CartCtrl">
+			<button ng-click="submit(product); $event.stopPropagation()" ng-if="!!user">Add to User Cart</button>
+		</div>
 		<br>
 		<h3>Price: ${{product.price/100}} </h3>
 	</div>
