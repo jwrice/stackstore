@@ -17,18 +17,15 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
     CartFactory.getUser().then(function(user){
         $scope.user = user
     })
-    // console.log($scope.user)
 
     CartFactory.getCart($scope.user._id)
     .then(function(user){
-        // console.log('after getting Cart, user is', user)
         $scope.user = user
     })
 
     $scope.submit = function (product) {
         CartFactory.addProduct($scope.user, product)
         .then(function(user){
-            // console.log(user)
             $scope.user = user
         })
     }
@@ -36,17 +33,23 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
     $scope.buyAndRemove = function (product){
         CartFactory.buyProduct($scope.user, product)
         .then(function(user){
-            console.log('user after buying product', user)
-            // $scope.user = user
             return user
         })
         .then(function(user){
-            console.log('user cart before update', user.cart)
-            return CartFactory.updateUser(user, product)
+            return CartFactory.updateUser(user)
         })
         .then(function(user){
-            console.log('user cart after update', user.cart)
             $scope.user = user
+        })
+    }
+
+    $scope.removeFromCart = function (product) {
+        $scope.user.cart = $scope.user.cart.filter(function(cartObj){
+                    return cartObj._id !== product._id
+                });
+        CartFactory.updateUser($scope.user)
+        .then(function(user){
+            $scope.user = user;
         })
     }
 
