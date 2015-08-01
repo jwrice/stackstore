@@ -1,3 +1,4 @@
-<div ng-repeat="product in cart">
-{{product}} 
+<div ng-repeat="product in user.cart">
+{{product}}
+	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
 </div>
