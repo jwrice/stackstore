@@ -45,9 +45,13 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
 
     $scope.buyAll = function () {
         var newTransactionArr = []
-        $scope.user.cart.forEach(function (product) {newTransactionArr.push(product);})
+        $scope.user.cart.forEach(function (product) {
+            newTransactionArr.push(product._id);
+        })
+        // console.log('newTransactionArr', newTransactionArr)
         $scope.user.pastPurchases = $scope.user.pastPurchases.concat(newTransactionArr);
         $scope.user.cart = [];
+        // console.log('pastPurchases after', $scope.user.pastPurchases);
         CartFactory.updateUser($scope.user);
     }
 
