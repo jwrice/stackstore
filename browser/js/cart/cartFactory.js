@@ -23,6 +23,7 @@ app.factory('CartFactory', function ($http, AuthService) {
 
 		buyProduct: function(user, product){
 			// (db) push to transaction
+			console.log('product', product)
 			var user = user;
 			return $http.post('api/transaction/'+user._id, product)
 			.then(function(res){
@@ -36,9 +37,11 @@ app.factory('CartFactory', function ($http, AuthService) {
         		})
 				return user;
 			})
-			// (local) remove from user.cart locally
-			// (db) remove from user cart
-			// $http.remove
+
+		},
+
+		buyAll : function (user) {
+			return $http.put('')
 		},
 
 		updateUser: function(user){
