@@ -29,6 +29,7 @@ app.factory('CartFactory', function ($http, AuthService) {
 				return res.data
 			})
 			.then(function(transaction) {
+				console.log('transaction', transaction)
 				user.pastPurchases.push(transaction)
 				user.cart = user.cart.filter(function(cartObj){
 					return cartObj._id !== transaction.product
