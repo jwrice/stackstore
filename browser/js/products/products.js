@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('ProductsController', function($scope, $rootScope,$state, ProductsFactory, InstructorFactory, CartFactory, $http) {
-	console.log('user.cart', $scope.user.cart)
+	// console.log('user.cart', $scope.user.cart)
 	$scope.cats = ["Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
 		$scope.category = category;
