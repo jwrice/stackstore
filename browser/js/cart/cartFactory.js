@@ -13,14 +13,6 @@ app.factory('CartFactory', function ($http, AuthService) {
 			})
 		},
 
-		addProduct: function(user, product){
-			user.cart.push(product._id)
-			return $http.put('/api/users/'+user._id, user)
-			.then(function(response){
-				return response.data
-			})
-		},
-
 		buyProduct: function(user, product){
 			// (db) push to transaction
 			console.log('product', product)
