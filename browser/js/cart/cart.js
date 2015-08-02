@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
     })
 });
 
-app.controller('CartCtrl', function($scope, $state, CartFactory) {
+app.controller('CartCtrl', function($scope, $state, $rootScope,CartFactory) {
 
     CartFactory.getUser().then(function(user){
         $scope.user = user
@@ -23,13 +23,6 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
         $scope.user = user
     })
 
-    $scope.submit = function (product) {
-        CartFactory.addProduct($scope.user, product)
-        .then(function(user){
-            $scope.user = user
-        })
-    }
-
     $scope.buyAndRemove = function (product){
         CartFactory.buyProduct($scope.user, product)
         .then(function(user){
@@ -39,7 +32,7 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
             return CartFactory.updateUser(user)
         })
         .then(function(user){
-            $scope.user = user
+            $rootScope.user = user
         })
     }
 
@@ -61,7 +54,7 @@ app.controller('CartCtrl', function($scope, $state, CartFactory) {
                 });
         CartFactory.updateUser($scope.user)
         .then(function(user){
-            $scope.user = user;
+            $rootScope.user = user;
         })
     }
 
