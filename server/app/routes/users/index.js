@@ -26,12 +26,13 @@ router.get('/:userId', function(req, res, next) {
 // adding/deleting products to the cart
 // changing info on user account page
 router.put('/:userId', function(req, res, next) {
-	console.log(req.currentUser, req.body)
+	console.log('req.currentUser before update',req.currentUser)
 	User.findByIdAndUpdate(req.currentUser._id, req.body, {'new': true})
 	.populate('cart').exec()
 	.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.currentUser = user;
+			console.log('req.currentUser after update', req.currentUser)
 			res.json(user);
 			next();
 		})
