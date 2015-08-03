@@ -4,7 +4,6 @@ app.factory('InstructorFactory', function($http) {
 
 			return $http.get('/api/instructor')
 				.then(function(response) {
-					console.log(response.data);
 					return response.data
 				})
 		},
