@@ -24,7 +24,7 @@ var schema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
     salt: {
         type: String,
         required: true

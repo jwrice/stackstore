@@ -1,18 +1,10 @@
-<div>
+ <div>
   <h1>Instructors:</h1>
   <button style="border:1px solid black; border-radius: 0px; background-color:#ddd" ng-click="toggleArrow()">
     <label>Stars</label>
     <img id="arrow" src="/imgs/{{arrowDir}}Arrow.png">
   </button>
   <a ng-repeat="instructor in instructors" ui-sref="singleInstructor({instructorId: instructor._id})">
-    <div id="instructorInfo" style="margin: 10px 10px; background-color: #bbb; border-radius:20px; padding:20px 20px;">
-      <img id="profilePic" src="/imgs/jimmy.jpg" style="width:130px; height:130px;">
-      <img id="stars" src="/imgs/{{instructor.rating.ratingsAverage}}Stars.png" style="float: right;">
-      <div style="display:inline-block; margin:10px 10px;">
-        <h2 style="display:inline-block;">{{instructor.fullName}}</h2>
-        <br>
-        <h4 style="display:inline-block;">{{instructor.email}}</h4>
-      </div>  
-    </div>
+    <instructor></instructor>
   </a>
 </div>

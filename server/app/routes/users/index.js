@@ -17,6 +17,16 @@ router.param('userId', function(req, res, next, userId) {
 		.then(null, next);
 })
 
+router.get('/', function(req, res, next){
+	User.find({})
+	.deepPopulate('cart cart.product')
+	.exec()
+	.then(function(users){
+		res.json(users);
+		next();
+	})
+	.then(null, next);
+})
 
 // get all info (even transactions)
 router.get('/:userId', function(req, res, next) {

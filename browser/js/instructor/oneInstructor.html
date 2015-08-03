@@ -7,17 +7,17 @@
     <h4 style="display:inline-block;">{{instructor.email}}</h4>
   </div>  
 
-  <div id="product" ng-repeat="product in products" style="margin: 10px 10px; padding: 20px 20px; background-color: #ddd; border-radius:20px;">
-   <h2 style="display:inline-block;">{{product.title}}</h2>
+  <product ng-repeat="product in products"></product>
+<!--    <h2 style="display:inline-block;">{{product.title}}</h2>
    <div style="float:right; padding-top: 50px">
      <button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button>
      <br>
       <h3>Price: ${{product.price/100}} </h3>
     </div>
-    <h4>
+    <h4>  
       <label ng-repeat="cat in product.categories">{{cat}}    </label>
     </h4>
     <h4>{{product.serviceDescription}}</h4>
     <h4>Time:   {{time.hours}}h {{time.minutes}}m </h4>
-  </div>
+  </div> -->
 </div>
