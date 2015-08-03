@@ -32,8 +32,8 @@ app.factory('CartFactory', function ($http, AuthService) {
 
 		},
 
-		buyAll : function (user) {
-			return $http.put('')
+		buyAllProducts : function (user) {
+			// return user.cart.forEach($http.post('/api/transaction/'+user._id, product)
 		},
 
 		updateUser: function(user){
