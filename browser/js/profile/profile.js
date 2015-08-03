@@ -12,14 +12,16 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
 	var User = function(){
 		AuthService.getLoggedInUser()
 		.then(function(user){
-			console.log(user)
 			return ProfileFactory.getUser(user)
 		})
 		.then(function(response){
 			$scope.user = response
-			console.log($scope.user)
 			return response
 		})
+	}
+
+	$scope.consoleme = function(){
+		console.log($scope.user.pastPurchases)
 	}
 
 	User()

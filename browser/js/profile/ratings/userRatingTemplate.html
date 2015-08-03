@@ -1,0 +1,7 @@
+<h4 ng-if="!transaction.rating" >Please set your rating:
+<div ng-repeat="item in noStars track by $index" class="glyphicon glyphicon-star-empty yellow" ng-click="setRating($index)"></div>
+</h4>
+
+<h4 ng-if="transaction.rating">Your rating:
+<div ng-repeat="item in userStars track by $index" class="glyphicon glyphicon-star"></div>
+</h4>
