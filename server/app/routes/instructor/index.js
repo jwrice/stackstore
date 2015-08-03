@@ -8,8 +8,7 @@ router.get('/', function(req, res, next) {
 	Instructor.find({})
 		.exec()
 		.then(function(instructors) {
-			console.log(instructors)
-			if (!instructors) throw "Error retrieving instructors";
+		if (!instructors) throw "Error retrieving instructors";
 			else {
 				res.json(instructors);
 			}

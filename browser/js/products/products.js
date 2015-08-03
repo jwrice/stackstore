@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductsController', function($scope, $rootScope,$state, ProductsFactory, InstructorFactory, CartFactory, $http) {
+app.controller('ProductsController', function($scope, $rootScope, $state, ProductsFactory, InstructorFactory, CartFactory, $http) {
 	// console.log('user.cart', $scope.user.cart)
 	$scope.cats = ["Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
@@ -32,19 +32,19 @@ app.controller('ProductsController', function($scope, $rootScope,$state, Product
 		return $scope.name;
 	}
 
-	 $scope.submit = function (product) {
-        // console.log('product before', product)
-        ProductsFactory.addProduct($scope.user, product)
-        .then(function(user){
-            // console.log('user.cart after addProduct', user.cart)  
-        	return CartFactory.updateUser(user)
-        })
-        .then(function(user) {
-        	console.log('user after updateUser', user)
-        	$scope.user = user;
-        	$rootScope.user = user;
-        })
-    }
+	$scope.submit = function(product) {
+		// console.log('product before', product)
+		ProductsFactory.addProduct($scope.user, product)
+			.then(function(user) {
+				// console.log('user.cart after addProduct', user.cart)  
+				return CartFactory.updateUser(user)
+			})
+			.then(function(user) {
+				console.log('user after updateUser', user)
+				$scope.user = user;
+				$rootScope.user = user;
+			})
+	}
 
 	$scope.viewProduct = function(id) {
 		console.log(id);
@@ -69,6 +69,7 @@ app.config(function($stateProvider) {
 app.controller('OneProductController', function($scope, ProductsFactory, $stateParams) {
 	ProductsFactory.getProduct($stateParams.id).then(function(product) {
 		$scope.product = product;
+		$scope.instructor = product.instructor;
 		$scope.time = {
 			hours: Math.floor(product.timeAvailable / 60),
 			minutes: product.timeAvailable % 60
