@@ -46,6 +46,9 @@ app.controller('CartCtrl', function($scope, $state, $rootScope,CartFactory) {
         $scope.user.cart = [];
         // console.log('pastPurchases after', $scope.user.pastPurchases);
         CartFactory.updateUser($scope.user);
+         .then(function(user){
+            $rootScope.user = user
+        })
     }
 
     $scope.removeFromCart = function (product) {

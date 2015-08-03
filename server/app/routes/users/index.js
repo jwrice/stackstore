@@ -51,3 +51,12 @@ router.post('/', function(req, res, next) {
 			next(err);
 		})
 });
+
+//update the user
+router.delete("/:userId", function(req, res, next) {
+	User.findByIdAndRemove(req.params.userId).exec()
+		.then(function(user) {
+			res.status(200).send(user)
+		})
+		.then(null, next);
+})
