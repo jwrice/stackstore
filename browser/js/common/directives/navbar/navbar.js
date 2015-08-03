@@ -22,12 +22,19 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
                 label: 'Cart',
                 state: 'cart',
                 auth: true
-            }];
-
-            scope.admin = {
+            }, {
                 label: 'Admin',
-                state: 'admin'
-            };
+                state: 'admin',
+                auth: true,
+                admin: true
+            }
+
+            ];
+
+            // scope.admin = {
+            //     label: 'Admin',
+            //     state: 'admin'
+            // };
 
             scope.user = null;
 
