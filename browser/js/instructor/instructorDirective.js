@@ -1,5 +1,6 @@
 app.directive("instructor", function() {
   return {
-    templateUrl: "/js/instructor/instructorTemplate.html"
+    templateUrl: "/js/instructor/instructorTemplate.html",
+    restrict: 'E'
   }
 })
