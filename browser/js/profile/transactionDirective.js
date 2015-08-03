@@ -1,5 +1,6 @@
 app.directive("trans", function() {
   return {
+    restrict: 'E',
     scope: {
       instructor: '=',
       product: '=',

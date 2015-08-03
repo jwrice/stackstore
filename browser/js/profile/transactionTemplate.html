@@ -14,6 +14,11 @@
   </h4>
   <h4>{{product.serviceDescription}}</h4>
   <h4>Time:   {{0+Math.floor(product.timeAvailable/60)}}h {{product.timeAvailable%60}}m </h4>
+  <span>
+    <user-rating instructor="instructor" product="product" transaction="transaction"></user-rating>
+  </span>
+  
   <instructor instructor="instructor"></instructor>
-  <button ng-click="giveProductRating(instructor._id, transaction._id, 3)">Rate</button>
+  <instructor ></instructor>
+  </div>
 </div>
