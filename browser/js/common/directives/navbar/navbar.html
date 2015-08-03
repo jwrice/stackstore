@@ -10,9 +10,6 @@
             <li ng-show="!user"> 
                 <a ui-sref="guestCart">Guest Cart</a> 
             </li>
-            <!-- <li ng-show="isAdmin()">
-                <a ui-sref="admin">{{ admin.label }}</a>
-            </li> -->
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <button ng-show="!user" ui-sref="newuser" class="btn login-button">Create Account</button>
