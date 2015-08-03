@@ -9,9 +9,16 @@ app.config(function ($stateProvider) {
 
 app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory) {
 
-	var getUser = function(){
-		AuthService.getLoggedInUser().then(function(user){
-			$scope.user = user
+	var User = function(){
+		AuthService.getLoggedInUser()
+		.then(function(user){
+			console.log(user)
+			return ProfileFactory.getUser(user)
+		})
+		.then(function(response){
+			console.log(response)
+			$scope.user = response
+			return response
 		})
 	}
 
@@ -21,6 +28,8 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
 	$scope.submitChange = function(){
 	}
 
-	getUser()
+	User()
+
+	// $scope.products = $scope.user.pastPurchases.forEach(return obj.product)
 
 })
