@@ -55,8 +55,9 @@ router.get('/:productId', function(req, res, next) {
 router.put("/:productId", function(req, res, next) {
 	Product.findByIdAndUpdate(req.params.productId, req.body, {
 			'new': true
-		}).exec()
+		})
 		.populate('instructor')
+		.exec()
 		.then(function(product) {
 			res.json(product);
 			next();

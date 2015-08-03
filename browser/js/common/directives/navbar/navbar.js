@@ -13,15 +13,20 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
                 { label: 'Instructors', state: 'instructor'},
                 { label: 'Members Only', state: 'membersOnly', auth: true },
                 { label: 'Cart', state: 'cart', auth: true},
-                { label: 'GuestCart', state: 'guestCart'},
-                { label: 'Admin', state: 'admin', auth: true}
+                { label: 'GuestCart', state: 'guestCart'}
             ];
+
+            scope.admin = { label: 'Admin', state: 'admin'};
 
             scope.user = null;
 
             scope.isLoggedIn = function() {
                 return AuthService.isAuthenticated();
             };
+
+            scope.isAdmin = function () {
+                return AuthService.isSuperUser();
+            }
 
             scope.logout = function() {
                 AuthService.logout().then(function() {
