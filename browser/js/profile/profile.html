@@ -1,3 +1,4 @@
+
 <h3>{{user.firstName}}'s Profile:</h3>
 <div class="row">
 	<div class="col-md-2 lead">First Name:</div>
@@ -12,6 +13,6 @@
 	<div class="col-md-10 lead">{{user.email}}</div>
 </div>
 <h3>Your Past Purchases</h3>
-<div ng-repeat="transaction in user.pastPurchases">
-	<trans instructor="transaction.product.instructor" product="transaction.product"></trans>
+<div ng-repeat="trans in user.pastPurchases">
+	<trans transaction="trans" instructor="trans.product.instructor" product="trans.product"></trans>
 </div>

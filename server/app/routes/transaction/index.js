@@ -26,6 +26,16 @@ router.get('/:userId', function(req, res, next) {
     .then(null, next);
 })
 
+router.put("/:transactionId", function(req, res, next) {
+  Transaction.findByIdAndUpdate(req.params.transactionId, {
+      rating: req.body.number
+    })
+    .then(function(transaction) {
+      res.json(transaction);
+    })
+    .then(null, next);
+});
+
 //add new transaction and add info from ajax call
 router.post("/:userId", function(req, res, next) {
   var routeUser

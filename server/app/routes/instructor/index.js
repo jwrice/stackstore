@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 	Instructor.find({})
 		.exec()
 		.then(function(instructors) {
-		if (!instructors) throw "Error retrieving instructors";
+			if (!instructors) throw "Error retrieving instructors";
 			else {
 				res.json(instructors);
 			}
@@ -39,32 +39,35 @@ router.get("/:instructorId", function(req, res, next) {
 		.then(null, next);
 })
 
-
-
 //Auth authentication here
-router.use('/:instructorId', function (req, res, next) {
+router.use('/:instructorId', function(req, res, next) {
 	Auth.isAdmin(req, res, next);
 });
 
-
-// change rating of instructor after transaction by user
-router.put('/:instructorId/rating', function (req,res,next) {
-    Instructor.findById(req.params.instructorId).exec()
-    .then(function (instructor) {
-        instructor.makeAverage(req.body.number);
-        res.json(instructor);
-    })
-    .then(null,next)
-})
-
 //update the instructor
 router.put("/:instructorId", function(req, res, next) {
-	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {"new":true})
+	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {
+			"new": true
+		})
 		.then(function(instructor) {
 			res.json(instructor);
 		})
 		.then(null, next);
 })
+
+// change rating of instructor after transaction by user
+router.put('/:instructorId/rating', function(req, res, next) {
+	Instructor.findById(req.params.instructorId).exec()
+		.then(function(instructor) {
+			return instructor.makeAverage(req.body.number);
+		})
+		.then(function(instructor) {
+			res.json(instructor);
+		})
+		.then(null, next)
+})
+
+
 
 //update the instructor
 router.delete("/:instructorId", function(req, res, next) {

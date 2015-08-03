@@ -4,19 +4,30 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
-        link: function (scope) {
+        link: function(scope) {
 
-            scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
-                { label: 'Products', state: 'products' },
-                { label: 'Instructors', state: 'instructor'},
-                { label: 'Members Only', state: 'membersOnly', auth: true },
-                { label: 'Cart', state: 'cart', auth: true},
-                { label: 'GuestCart', state: 'guestCart'}
-            ];
+            scope.items = [{
+                label: 'Home',
+                state: 'home'
+            }, {
+                label: 'About',
+                state: 'about'
+            }, {
+                label: 'Products',
+                state: 'products'
+            }, {
+                label: 'Instructors',
+                state: 'instructor'
+            }, {
+                label: 'Cart',
+                state: 'cart',
+                auth: true
+            }];
 
-            scope.admin = { label: 'Admin', state: 'admin'};
+            scope.admin = {
+                label: 'Admin',
+                state: 'admin'
+            };
 
             scope.user = null;
 
@@ -24,7 +35,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
                 return AuthService.isAuthenticated();
             };
 
-            scope.isAdmin = function () {
+            scope.isAdmin = function() {
                 return AuthService.isSuperUser();
             }
 
