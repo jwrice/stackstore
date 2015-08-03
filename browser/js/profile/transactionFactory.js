@@ -1,4 +1,4 @@
-app.factory("TransactionFactory", function() {
+app.factory("TransactionFactory", function($http) {
   return {
     makeRating: function(transactionId, rating) {
       return $http.put("/api/transaction/" + transactionId, {

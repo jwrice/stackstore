@@ -14,7 +14,7 @@ app.factory('InstructorFactory', function($http) {
 				})
 		},
 		makeRating: function(instructorId, num) {
-			return $http.put('/api/instructor/' + instructorId, {
+			return $http.put('/api/instructor/' + instructorId + '/rating', {
 					number: num
 				})
 				.then(function(res) {

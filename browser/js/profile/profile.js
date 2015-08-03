@@ -23,15 +23,4 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
 
   User()
 
-  $scope.giveProductRating = function(instructorId, transactionId, rating) {
-    InstructorFactory.makeRating(instructorId, rating)
-      .then(function(instructor) {
-        console.log(instructor);
-      })
-    TransactionFactory.makeRating(transactionId, rating)
-      .then(function(transaction) {
-        console.log(transaction);
-        User();
-      });
-  }
 })

@@ -9,9 +9,9 @@ var Product = mongoose.model('Product');
 
 router.param('userId', function(req, res, next, userId) {
 	User.findById(userId)
-	.populate('cart')
-	.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
-	.exec()
+		.populate('cart')
+		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
+		.exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.currentUser = user;
@@ -21,15 +21,15 @@ router.param('userId', function(req, res, next, userId) {
 		.then(null, next);
 })
 
-router.get('/', function(req, res, next){
+router.get('/', function(req, res, next) {
 	User.find({})
-	.deepPopulate('cart cart.product')
-	.exec()
-	.then(function(users){
-		res.json(users);
-		next();
-	})
-	.then(null, next);
+		.deepPopulate('cart cart.product')
+		.exec()
+		.then(function(users) {
+			res.json(users);
+			next();
+		})
+		.then(null, next);
 })
 
 // get all info (even transactions)
@@ -40,11 +40,13 @@ router.get('/:userId', function(req, res, next) {
 // adding/deleting products to the cart
 // changing info on user account page
 router.put('/:userId', function(req, res, next) {
-	console.log('req.currentUser before update',req.currentUser)
-	User.findByIdAndUpdate(req.currentUser._id, req.body, {'new': true})
-	.deepPopulate('cart cart.product')
-	.exec()
-	.then(function(user) {
+	console.log('req.currentUser before update', req.currentUser)
+	User.findByIdAndUpdate(req.currentUser._id, req.body, {
+			'new': true
+		})
+		.deepPopulate('cart cart.product')
+		.exec()
+		.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.currentUser = user;
 			console.log('req.currentUser after update', req.currentUser)
