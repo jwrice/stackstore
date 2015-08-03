@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Instructor = mongoose.model('Instructor');
+var Auth = require('../auth.middleware.js')
 
 router.get('/', function(req, res, next) {
 	Instructor.find({})
@@ -37,6 +38,14 @@ router.get("/:instructorId", function(req, res, next) {
 		})
 		.then(null, next);
 })
+
+
+
+//Auth authentication here
+router.use('/:instructorId', function (req, res, next) {
+	Auth.isAdmin(req, res, next);
+});
+
 
 // change rating of instructor after transaction by user
 router.put('/:instructorId/rating', function (req,res,next) {

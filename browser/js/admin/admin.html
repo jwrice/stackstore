@@ -4,6 +4,7 @@
 	<div ng-repeat="user in users">
 		{{user.firstName+" "+user.lastName}}
 		<button ng-click="deleteUser(user)">Delete</button>
+		<button ui-sref="editUser({userId: user._id})">Edit</button>
 	</div>
 </div>
 
@@ -12,6 +13,7 @@
 	<div ng-repeat="instructor in instructors">
 		{{instructor.fullName}}
 		<button ng-click="deleteIns(instructor)">Delete</button>
+		<button ui-sref="editIns({instructorId: instructor._id})">Edit</button>
 	</div>
 </div>
 
@@ -20,6 +22,7 @@
 	<div ng-repeat="product in products">
 		{{product.title}}
 		<button ng-click="deleteProduct(product)">Delete</button>
+		<button ui-sref="editProduct({productId: product._id})">Edit</button>
 	</div>
 </div>
 </div>
