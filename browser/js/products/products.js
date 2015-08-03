@@ -7,7 +7,8 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('ProductsController', function($scope, $state, ProductsFactory, InstructorFactory, $http) {
+app.controller('ProductsController', function($scope, $rootScope,$state, ProductsFactory, InstructorFactory, CartFactory, $http) {
+	// console.log('user.cart', $scope.user.cart)
 	$scope.cats = ["Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
 		$scope.category = category;
@@ -30,6 +31,20 @@ app.controller('ProductsController', function($scope, $state, ProductsFactory, I
 		})
 		return $scope.name;
 	}
+
+	 $scope.submit = function (product) {
+        // console.log('product before', product)
+        ProductsFactory.addProduct($scope.user, product)
+        .then(function(user){
+            // console.log('user.cart after addProduct', user.cart)  
+        	return CartFactory.updateUser(user)
+        })
+        .then(function(user) {
+        	console.log('user after updateUser', user)
+        	$scope.user = user;
+        	$rootScope.user = user;
+        })
+    }
 
 	$scope.viewProduct = function(id) {
 		console.log(id);

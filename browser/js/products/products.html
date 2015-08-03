@@ -15,7 +15,7 @@
 		<div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-controller="GuestCartCtrl">
 			<button ng-click="submit(product); $event.stopPropagation()" ng-if="!user">Add to Guest Cart</button>
 		</div>
-		<div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;" ng-controller="CartCtrl">
+		<div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;">
 			<button ng-click="submit(product); $event.stopPropagation()" ng-if="!!user">Add to User Cart</button>
 		</div>
 		<br>

@@ -12,26 +12,54 @@ app.config(function ($stateProvider) {
     })
 });
 
-app.controller('CartCtrl', function($scope, $state, CartFactory) {
+app.controller('CartCtrl', function($scope, $state, $rootScope,CartFactory) {
 
     CartFactory.getUser().then(function(user){
         $scope.user = user
     })
-    console.log($scope.user)
 
     CartFactory.getCart($scope.user._id)
-    .then(function(cart){
-        console.log('user cart is', cart)
-        $scope.cart = cart
+    .then(function(user){
+        $scope.user = user
     })
 
-    $scope.submit = function (product) {
-        CartFactory.addProduct($scope.user, product)
+    $scope.buyAndRemove = function (product){
+        CartFactory.buyProduct($scope.user, product)
         .then(function(user){
-            console.log(user)
-            $scope.user = user
+            return user
+        })
+        .then(function(user){
+            return CartFactory.updateUser(user)
+        })
+        .then(function(user){
+            $rootScope.user = user
         })
     }
+
+    $scope.buyAll = function () {
+        var newTransactionArr = []
+        $scope.user.cart.forEach(function (product) {
+            newTransactionArr.push(product._id);
+        })
+        // console.log('newTransactionArr', newTransactionArr)
+        $scope.user.pastPurchases = $scope.user.pastPurchases.concat(newTransactionArr);
+        $scope.user.cart = [];
+        // console.log('pastPurchases after', $scope.user.pastPurchases);
+        CartFactory.updateUser($scope.user);
+    }
+
+    $scope.removeFromCart = function (product) {
+        $scope.user.cart = $scope.user.cart.filter(function(cartObj){
+                    return cartObj._id !== product._id
+                });
+        CartFactory.updateUser($scope.user)
+        .then(function(user){
+            $rootScope.user = user;
+        })
+    }
+
+
+
 
 });
 
