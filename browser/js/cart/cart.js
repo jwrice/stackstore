@@ -84,4 +84,18 @@ app.controller('GuestCartCtrl', function($scope, localStorageService) {
         }
     }
 
+    $scope.delete = function(id){
+        var temp = localStorageService.get('cartItems');
+        for (var i = 0; i < temp.length; i++) {
+            if(temp[i]._id===id){
+                temp.splice(i,1);
+            }
+        };
+        localStorageService.set('cartItems',temp);
+    }
+
+    $scope.buyAll = function(){
+        localStorageService.remove('cartItems');
+    }
+
 });
