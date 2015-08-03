@@ -21,6 +21,16 @@ router.param('userId', function(req, res, next, userId) {
 		.then(null, next);
 })
 
+router.get('/', function(req, res, next){
+	User.find({})
+	.deepPopulate('cart cart.product')
+	.exec()
+	.then(function(users){
+		res.json(users);
+		next();
+	})
+	.then(null, next);
+})
 
 // get all info (even transactions)
 router.get('/:userId', function(req, res, next) {
@@ -55,3 +65,12 @@ router.post('/', function(req, res, next) {
 			next(err);
 		})
 });
+
+//update the user
+router.delete("/:userId", function(req, res, next) {
+	User.findByIdAndRemove(req.params.userId).exec()
+		.then(function(user) {
+			res.status(200).send(user)
+		})
+		.then(null, next);
+})
