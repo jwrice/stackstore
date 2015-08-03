@@ -20,8 +20,8 @@ var Instructor = new schema({
 
 
 Instructor.methods.makeAverage = function(number) {
-  this.ratingsAverage = (this.numOfRat * this.ratingsAverage + number) / (this.numOfRat + 1)
-  this.numOfRat++;
+  this.rating.ratingsAverage = (this.rating.numOfRat * this.rating.ratingsAverage + number) / (++this.rating.numOfRat);
+  return this.save();
 }
 
 mongoose.model('Instructor', Instructor);

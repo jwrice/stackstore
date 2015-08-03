@@ -1,0 +1,23 @@
+<div class="row">
+	<div id="product" class="prdtli" style="margin: 10px 10px; padding: 20px 20px; background-color: #ddd; border-radius:20px;">
+  <h2 style="display:inline-block;">{{product.title}}</h2>
+  <div style="float:right; padding-top: 50px">
+    <div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;">
+    </div>
+    <div class="right" style="float:right; font-size:1.5em; margin-bottom:10px;">
+    </div>
+    <br>
+    <h3>Price: ${{product.price/100}} </h3>
+  </div>
+  <h4>
+    <label>{{product.categories[1]}}    </label>
+  </h4>
+  <h4>{{product.serviceDescription}}</h4>
+  <h4>Time:   {{0+Math.floor(product.timeAvailable/60)}}h {{product.timeAvailable%60}}m </h4>
+  <span>
+    <user-rating instructor="instructor" product="product" transaction="transaction"></user-rating>
+  </span>
+  
+  <instructor instructor="instructor"></instructor>
+  </div>
+</div>

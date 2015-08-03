@@ -20,7 +20,8 @@ var transaction = new mongoose.Schema({
   price: {
     type: Number,
     required: true
-  }
+  },
+  rating: Number
 });
 
 //allows deep population //see github docs for usage

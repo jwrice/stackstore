@@ -6,26 +6,31 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
+var Auth = require('../auth.middleware.js')
 
 router.param('userId', function(req, res, next, userId) {
-	User.findById(userId).populate('cart', 'pastPurchases').exec()
+	User.findById(userId)
+		.populate('cart')
+		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
+		.exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.currentUser = user;
+			console.log(user)
 			next();
 		})
 		.then(null, next);
 })
 
-router.get('/', function(req, res, next){
+router.get('/', function(req, res, next) {
 	User.find({})
-	.deepPopulate('cart cart.product')
-	.exec()
-	.then(function(users){
-		res.json(users);
-		next();
-	})
-	.then(null, next);
+		.deepPopulate('cart cart.product')
+		.exec()
+		.then(function(users) {
+			res.json(users);
+			next();
+		})
+		.then(null, next);
 })
 
 // get all info (even transactions)
@@ -33,22 +38,6 @@ router.get('/:userId', function(req, res, next) {
 	res.json(req.currentUser);
 });
 
-// adding/deleting products to the cart
-// changing info on user account page
-router.put('/:userId', function(req, res, next) {
-	console.log('req.currentUser before update',req.currentUser)
-	User.findByIdAndUpdate(req.currentUser._id, req.body, {'new': true})
-	.deepPopulate('cart cart.product')
-	.exec()
-	.then(function(user) {
-			if (!user) throw new Error("user not found");
-			req.currentUser = user;
-			console.log('req.currentUser after update', req.currentUser)
-			res.json(req.currentUser);
-			next();
-		})
-		.then(null, next);
-});
 
 // sign up
 router.post('/', function(req, res, next) {
@@ -60,6 +49,34 @@ router.post('/', function(req, res, next) {
 		}, function(err) {
 			next(err);
 		})
+});
+
+
+
+// Auth authentication here
+router.use('/:userId', Auth.isAuthenticated, function (req, res, next) {
+	if (req.currentUser._id == req.user._id) next();
+	else Auth.isAdmin(req, res, next);
+});
+
+
+// adding/deleting products to the cart
+// changing info on user account page
+router.put('/:userId', function(req, res, next) {
+	console.log('req.currentUser before update', req.currentUser)
+	User.findByIdAndUpdate(req.currentUser._id, req.body, {
+			'new': true
+		})
+		.deepPopulate('cart cart.product')
+		.exec()
+		.then(function(user) {
+			if (!user) throw new Error("user not found");
+			req.currentUser = user;
+			console.log('req.currentUser after update', req.currentUser)
+			res.json(req.currentUser);
+			next();
+		})
+		.then(null, next);
 });
 
 //update the user

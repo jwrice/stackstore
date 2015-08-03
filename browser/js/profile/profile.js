@@ -1,26 +1,26 @@
-app.config(function ($stateProvider) {
-    $stateProvider
+app.config(function($stateProvider) {
+  $stateProvider
     .state('profile', {
-        url: '/user/user/profile',
-        templateUrl: 'js/profile/profile.html',
-        controller: 'ProfileCtrl'
+      url: '/user/user/profile',
+      templateUrl: 'js/profile/profile.html',
+      controller: 'ProfileCtrl'
     })
 });
 
-app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory) {
+app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory, TransactionFactory) {
 
-	var getUser = function(){
-		AuthService.getLoggedInUser().then(function(user){
-			$scope.user = user
-		})
-	}
+  var User = function() {
+    AuthService.getLoggedInUser()
+      .then(function(user) {
+        return ProfileFactory.getUser(user)
+      })
+      .then(function(response) {
+        $scope.user = response
+        console.log(response);
+        return response
+      })
+  }
 
-	$scope.editProfileItem = function(){
-	}
-
-	$scope.submitChange = function(){
-	}
-
-	getUser()
+  User()
 
 })
