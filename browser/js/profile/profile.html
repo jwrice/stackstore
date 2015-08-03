@@ -1,6 +1,29 @@
+<h3>{{user.firstName}}'s Profile:</h3>
 <div class="row">
-	<div ng-repeat-start="(key,value) in user"></div>
-		<div class="col-md-2 lead">{{key}}</div>
-		<div class="col-md-10 lead">{{value}}</div>
-	<div ng-repeat-end=""></div>
+	<div class="col-md-2 lead">First Name:</div>
+	<div class="col-md-10 lead">{{user.firstName}}</div>
+</div>
+<div class="row">
+	<div class="col-md-2 lead">Last Name:</div>
+	<div class="col-md-10 lead">{{user.lastName}}</div>
+</div>
+<div class="row">
+	<div class="col-md-2 lead">Email:</div>
+	<div class="col-md-10 lead">{{user.email}}</div>
+</div>
+<div class="row">
+	<div class="col-md-2 lead">Past Purchases</div>
+	<div class="col-md-10 lead">{{user.pastPurchases}}</div>
+</div>
+<h3>Your Past Purchases</h3>
+	<div class="row">
+		<div class="col-md-4 lead">Transaction ID</div>
+		<div class="col-md-4 lead">Product ID</div>
+		<div class="col-md-4 lead">Rating</div>
+	</div>
+<div ng-repeat="transaction in user.pastPurchases">
+	<div class="row">
+		<div class="col-md-4 lead">{{transaction}}</div>
+		<div class="col-md-4 lead">{{transaction.product}}</div>
+	</div>
 </div>
