@@ -18,7 +18,7 @@ app.controller('InstructorCtrl', function($scope, $state, InstructorFactory) {
         $scope.instructors = res
             //sorting by stars
         $scope.instructors = $scope.instructors.sort(function(first, second) {
-            return first.rating - second.rating;
+            return first.rating.ratingsAverage - second.rating.ratingsAverage;
         })
         $scope.instructors.reverse();
     })
