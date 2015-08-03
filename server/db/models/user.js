@@ -21,6 +21,10 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     salt: {
         type: String,
         required: true

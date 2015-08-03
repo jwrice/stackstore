@@ -66,12 +66,9 @@ router.put("/:productId", function(req, res, next) {
 
 //delete a product
 router.delete("/:productId", function(req, res, next) {
-	Product.findById(req.params.productId).exec()
+	Product.findByIdAndRemove(req.params.productId).exec()
 		.then(function(product) {
-			product.remove();
-			res.json({
-				message: "deleted"
-			});
+			res.json(product);
 		})
 		.then(null, next);
 })
