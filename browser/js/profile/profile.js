@@ -16,16 +16,10 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
 			return ProfileFactory.getUser(user)
 		})
 		.then(function(response){
-			console.log(response)
 			$scope.user = response
+			console.log($scope.user)
 			return response
 		})
-	}
-
-	$scope.editProfileItem = function(){
-	}
-
-	$scope.submitChange = function(){
 	}
 
 	User()
