@@ -4,6 +4,7 @@ module.exports = router;
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 var Instructor = mongoose.model('Instructor');
+var Auth = require('../auth.middleware.js');
 
 router.get('/', function(req, res, next) {
 	Product.find({})
@@ -51,12 +52,21 @@ router.get('/:productId', function(req, res, next) {
 		.then(null, next);
 })
 
+
+//Auth authentication here
+router.use('/:productId', function (req, res, next) {
+	Auth.isAdmin(req, res, next);
+});
+
+
+
 //update a product
 router.put("/:productId", function(req, res, next) {
 	Product.findByIdAndUpdate(req.params.productId, req.body, {
 			'new': true
-		}).exec()
+		})
 		.populate('instructor')
+		.exec()
 		.then(function(product) {
 			res.json(product);
 			next();

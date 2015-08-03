@@ -123,7 +123,19 @@ var seedProducts = function () {
    return Product.createAsync(products);
 }
 var seedUsers = function () {
-   var users = [];
+  var users = [];
+      User.create({
+       lastName: "Super",
+       firstName: "User",
+       email: 'superuser@gmail.com',
+       password: '123',
+       isAdmin: true,
+       salt: User.generateSalt(),
+       cart: [],
+       pastPurchases: []
+   }).then(function(user){
+      users.push(user);
+   })
    for (var i = 0; i < numUsers; i++) {
        randUser(existingPds).then(function(user){
            users.push(user);

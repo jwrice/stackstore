@@ -6,6 +6,7 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
+var Auth = require('../auth.middleware.js')
 
 router.param('userId', function(req, res, next, userId) {
 	User.findById(userId)
@@ -37,6 +38,28 @@ router.get('/:userId', function(req, res, next) {
 	res.json(req.currentUser);
 });
 
+
+// sign up
+router.post('/', function(req, res, next) {
+	var user = new User(req.body)
+	user.salt = User.generateSalt()
+	user.save()
+		.then(function(user) {
+			res.json(user);
+		}, function(err) {
+			next(err);
+		})
+});
+
+
+
+// Auth authentication here
+router.use('/:userId', Auth.isAuthenticated, function (req, res, next) {
+	if (req.currentUser._id == req.user._id) next();
+	else Auth.isAdmin(req, res, next);
+});
+
+
 // adding/deleting products to the cart
 // changing info on user account page
 router.put('/:userId', function(req, res, next) {
@@ -54,18 +77,6 @@ router.put('/:userId', function(req, res, next) {
 			next();
 		})
 		.then(null, next);
-});
-
-// sign up
-router.post('/', function(req, res, next) {
-	var user = new User(req.body)
-	user.salt = User.generateSalt()
-	user.save()
-		.then(function(user) {
-			res.json(user);
-		}, function(err) {
-			next(err);
-		})
 });
 
 //update the user

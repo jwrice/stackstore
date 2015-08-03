@@ -22,17 +22,22 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
                 label: 'Cart',
                 state: 'cart',
                 auth: true
-            }, {
-                label: 'Admin',
-                state: 'admin',
-                auth: true
             }];
+
+            scope.admin = {
+                label: 'Admin',
+                state: 'admin'
+            };
 
             scope.user = null;
 
             scope.isLoggedIn = function() {
                 return AuthService.isAuthenticated();
             };
+
+            scope.isAdmin = function() {
+                return AuthService.isSuperUser();
+            }
 
             scope.logout = function() {
                 AuthService.logout().then(function() {

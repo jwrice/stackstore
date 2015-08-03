@@ -54,4 +54,5 @@ app.controller('AdminCtrl', function($scope, $state, $http,InstructorFactory,Pro
 		$scope.users = users.data;
 	})
 
+
 })
