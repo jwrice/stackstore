@@ -1,3 +1,4 @@
+
 app.config(function($stateProvider){
 	$stateProvider
 	.state('editProduct', {
@@ -5,6 +6,7 @@ app.config(function($stateProvider){
 		templateUrl: 'js/admin/editProduct.html',
 		controller: 'editProductCtrl'
 	})
+
 })
 
 app.controller('editProductCtrl', function($scope,$http,$stateParams, $state){
