@@ -1,3 +1,5 @@
 <div ng-repeat="product in retrieve()">
 {{product}}
+<button ng-click="delete(product._id)">Delete From Cart</button>
 </div>
+<button ng-click="buyAll()">Buy all</button>

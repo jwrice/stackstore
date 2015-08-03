@@ -21,7 +21,6 @@ router.get('/', function(req, res, next) {
 //add new product
 router.post("/:instructorId", function(req, res, next) {
 	req.body.instructor = req.params.instructorId;
-	console.log("hit here", req.body);
 	Product.create(req.body)
 		.then(function(product) {
 			res.json(product);
