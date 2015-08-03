@@ -1,29 +1,37 @@
-app.config(function ($stateProvider) {
-    $stateProvider
+app.config(function($stateProvider) {
+  $stateProvider
     .state('profile', {
-        url: '/user/user/profile',
-        templateUrl: 'js/profile/profile.html',
-        controller: 'ProfileCtrl'
+      url: '/user/user/profile',
+      templateUrl: 'js/profile/profile.html',
+      controller: 'ProfileCtrl'
     })
 });
 
-app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory) {
+app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory, TransactionFactory) {
 
-	var User = function(){
-		AuthService.getLoggedInUser()
-		.then(function(user){
-			console.log(user)
-			return ProfileFactory.getUser(user)
-		})
-		.then(function(response){
-			$scope.user = response
-			console.log($scope.user)
-			return response
-		})
-	}
+  var User = function() {
+    AuthService.getLoggedInUser()
+      .then(function(user) {
+        return ProfileFactory.getUser(user)
+      })
+      .then(function(response) {
+        $scope.user = response
+        console.log(response);
+        return response
+      })
+  }
 
-	User()
+  User()
 
-	// $scope.products = $scope.user.pastPurchases.forEach(return obj.product)
-
+  $scope.giveProductRating = function(instructorId, transactionId, rating) {
+    InstructorFactory.makeRating(instructorId, rating)
+      .then(function(instructor) {
+        console.log(instructor);
+      })
+    TransactionFactory.makeRating(transactionId, rating)
+      .then(function(transaction) {
+        console.log(transaction);
+        User();
+      });
+  }
 })

@@ -1,9 +1,9 @@
 app.directive("trans", function() {
   return {
     scope: {
-    	instructor: '=',
-		product: '='
-	},
+      instructor: '=',
+      product: '='
+    },
     templateUrl: "/js/profile/transactionTemplate.html"
   }
 })

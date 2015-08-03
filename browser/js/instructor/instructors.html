@@ -5,6 +5,6 @@
     <img id="arrow" src="/imgs/{{arrowDir}}Arrow.png">
   </button>
   <a ng-repeat="instructor in instructors" ui-sref="singleInstructor({instructorId: instructor._id})">
-    <instructor></instructor>
+    <instructor instructor="instructor"></instructor>
   </a>
 </div>

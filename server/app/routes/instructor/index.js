@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 	Instructor.find({})
 		.exec()
 		.then(function(instructors) {
-		if (!instructors) throw "Error retrieving instructors";
+			if (!instructors) throw "Error retrieving instructors";
 			else {
 				res.json(instructors);
 			}
@@ -39,18 +39,20 @@ router.get("/:instructorId", function(req, res, next) {
 })
 
 // change rating of instructor after transaction by user
-router.put('/:instructorId/rating', function (req,res,next) {
-    Instructor.findById(req.params.instructorId).exec()
-    .then(function (instructor) {
-        instructor.makeAverage(req.body.number);
-        res.json(instructor);
-    })
-    .then(null,next)
+router.put('/:instructorId/rating', function(req, res, next) {
+	Instructor.findById(req.params.instructorId).exec()
+		.then(function(instructor) {
+			instructor.makeAverage(req.body.number);
+			res.json(instructor);
+		})
+		.then(null, next)
 })
 
 //update the instructor
 router.put("/:instructorId", function(req, res, next) {
-	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {"new":true})
+	Instructor.findByIdAndUpdate(req.params.instructorId, req.body, {
+			"new": true
+		})
 		.then(function(instructor) {
 			res.json(instructor);
 		})
