@@ -9,22 +9,25 @@ app.config(function ($stateProvider) {
 
 app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory) {
 
-	var getUser = function(){
+	var User = function(){
 		AuthService.getLoggedInUser()
 		.then(function(user){
-			return $http.get('/api/users'+userId)
+			console.log(user)
+			return ProfileFactory.getUser(user)
 		})
 		.then(function(response){
-			return response.data
+			console.log(response)
+			$scope.user = response
+			return response
 		})
 	}
-	
+
 	$scope.editProfileItem = function(){
 	}
 
 	$scope.submitChange = function(){
 	}
 
-	getUser()
+	User()
 
 })

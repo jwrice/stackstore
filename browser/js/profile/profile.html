@@ -11,19 +11,17 @@
 	<div class="col-md-2 lead">Email:</div>
 	<div class="col-md-10 lead">{{user.email}}</div>
 </div>
-<div class="row">
-	<div class="col-md-2 lead">Past Purchases</div>
-	<div class="col-md-10 lead">{{user.pastPurchases}}</div>
-</div>
 <h3>Your Past Purchases</h3>
 	<div class="row">
-		<div class="col-md-4 lead">Transaction ID</div>
-		<div class="col-md-4 lead">Product ID</div>
-		<div class="col-md-4 lead">Rating</div>
+		<div class="col-md-4 lead">Product</div>
+		<div class="col-md-4 lead">Product Instructor</div>
+		<div class="col-md-4 lead">Price</div>
 	</div>
-<div ng-repeat="transaction in user.pastPurchases">
+<div ng-repeat="transaction in user.pastPurchases track by $index">
 	<div class="row">
-		<div class="col-md-4 lead">{{transaction}}</div>
-		<div class="col-md-4 lead">{{transaction.product}}</div>
+		<div class="col-md-4 lead">{{transaction.product.title}}</div>
+		<div class="col-md-4 lead">{{transaction.product.instructor.fullName}}</div>
+		<div class="col-md-4 lead">${{transaction.price/100}}</div>
 	</div>
+	<transaction></transaction>
 </div>

@@ -8,10 +8,14 @@ var User = mongoose.model('User');
 var Product = mongoose.model('Product');
 
 router.param('userId', function(req, res, next, userId) {
-	User.findById(userId).populate('cart', 'pastPurchases').exec()
+	User.findById(userId)
+	.populate('cart')
+	.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
+	.exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
 			req.currentUser = user;
+			console.log(user)
 			next();
 		})
 		.then(null, next);
