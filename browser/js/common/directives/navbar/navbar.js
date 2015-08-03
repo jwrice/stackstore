@@ -4,18 +4,29 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
         restrict: 'E',
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
-        link: function (scope) {
+        link: function(scope) {
 
-            scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
-                { label: 'Products', state: 'products' },
-                { label: 'Instructors', state: 'instructor'},
-                { label: 'Members Only', state: 'membersOnly', auth: true },
-                { label: 'Cart', state: 'cart', auth: true},
-                { label: 'GuestCart', state: 'guestCart'},
-                { label: 'Admin', state: 'admin', auth: true}
-            ];
+            scope.items = [{
+                label: 'Home',
+                state: 'home'
+            }, {
+                label: 'About',
+                state: 'about'
+            }, {
+                label: 'Products',
+                state: 'products'
+            }, {
+                label: 'Instructors',
+                state: 'instructor'
+            }, {
+                label: 'Cart',
+                state: 'cart',
+                auth: true
+            }, {
+                label: 'Admin',
+                state: 'admin',
+                auth: true
+            }];
 
             scope.user = null;
 
