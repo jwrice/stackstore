@@ -30,4 +30,6 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
 
 	User()
 
+	// $scope.products = $scope.user.pastPurchases.forEach(return obj.product)
+
 })
