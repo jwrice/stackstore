@@ -15,9 +15,12 @@ app.config(function($stateProvider) {
 app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory, AuthService) {
 
 
-    AuthService.getLoggedInUser().then(function(user) {
+    AuthService.getLoggedInUser(true).then(function(user) {
         console.log(user);
-        return $scope.user = user;
+        CartFactory.getUser(user)
+        .then(function(user){
+            return $scope.user = user;    
+        })
     })
 
     $scope.buyAndRemove = function(product) {

@@ -1,11 +1,25 @@
 app.factory('CartFactory', function($http, AuthService) {
 	return {
 
+		getCart: function(userId) {
+			return $http.get('/api/users/'+userId)
+			.then(function (response){
+				return response.data
+			})
+		},
+
+		getUser: function(user){
+			return $http.get('/api/users/'+user._id)
+			.then(function(response){
+				return response.data
+			})
+		},
+
 		buyProduct: function(user, product) {
 			// (db) push to transaction
 			console.log('product', product, 'user', user)
 			var user = user;
-			return $http.post('api/transaction/' + user._id, product)
+			return $http.post('/api/transaction/' + user._id, product)
 				.then(function(res) {
 					return res.data
 				})
