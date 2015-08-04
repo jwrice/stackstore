@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 app.use('/api', require('./routes'));
 app.post('/stripe', function(req, res){
   console.log(req.body);
-   var stripeToken = req.body.stripeToken;
+   var stripeToken = req.body.id;
+   console.log('stripeToken', stripeToken)
    var charge = stripe.charges.create({
      amount: 1000, // amount in cents, again
      currency: "usd",
