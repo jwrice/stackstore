@@ -13,7 +13,7 @@ name in the environment files.
 */
 
 var chance = require('chance')(123),
-   _ = require('lodash');
+  _ = require('lodash');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var chalk = require('chalk');
@@ -26,142 +26,149 @@ var numUsers = 10;
 var numIns = 10;
 var numProducts = 20;
 var emails = chance.unique(chance.email, 100);
-var categories = ["JavaScript","Java","Python","C++","Ruby","Objective-C"];
+var categories = ["JavaScript", "Java", "Python", "C++", "Ruby", "Objective-C"];
 
-function randUser (pds) {
-   return User.create({
-       lastName: chance.last(),
-       firstName: chance.first(),
-       email: emails.pop(),
-       password: chance.word(),
-       salt: User.generateSalt(),
-       cart: [chance.pick(pds)._id],
-       pastPurchases: [chance.pick(pds)._id]
-   });
+function randUser(pds) {
+  return User.create({
+    lastName: chance.last(),
+    firstName: chance.first(),
+    email: emails.pop(),
+    password: chance.word(),
+    salt: User.generateSalt(),
+    cart: [chance.pick(pds)._id],
+    pastPurchases: [chance.pick(pds)._id]
+  });
 }
 
 
-function randIns () {
-   var rating = chance.natural({
-       min:1,
-       max:5
-   })
-   var num = chance.natural({
-       min:10,
-       max:50
-   })
-   return Instructor.create({
-       fullName: chance.first() + ' ' + chance.last(),
-       email: emails.pop(),
-       rating: {
-           numOfRat: num,
-           ratingsAverage: rating
-       }
-   })
+function randIns() {
+  var rating = chance.natural({
+    min: 1,
+    max: 5
+  })
+  var num = chance.natural({
+    min: 10,
+    max: 50
+  })
+  return Instructor.create({
+    fullName: chance.first() + ' ' + chance.last(),
+    email: emails.pop(),
+    rating: {
+      numOfRat: num,
+      ratingsAverage: rating
+    },
+    picture: randImg()
+  })
 }
 
-function randTitle () {
-   var numWords = chance.natural({
-       min: 1,
-       max: 8
-   });
-   return chance.sentence({words: numWords})
-   .replace(/\b\w/g, function (m) {
-       return m.toUpperCase();
-   })
-   .slice(0, -1);
+function randTitle() {
+  var numWords = chance.natural({
+    min: 1,
+    max: 8
+  });
+  return chance.sentence({
+      words: numWords
+    })
+    .replace(/\b\w/g, function(m) {
+      return m.toUpperCase();
+    })
+    .slice(0, -1);
 }
 
-function randProduct (allIns) {
-   var instructor = chance.pick(allIns);
-   var price = chance.natural({
-       min: 1000,
-       max: 5000
-   });
-   var timeAvailable = chance.natural({
-       min: 30,
-       max: 120
-   })
-   return Product.create({
-       title: randTitle(),
-       serviceDescription: randTitle(),
-       price: price,
-       timeAvailable: timeAvailable,
-       instructor: instructor._id,
-       categories: ["ALL",chance.pick(categories)]
-   });
+function randProduct(allIns) {
+  var instructor = chance.pick(allIns);
+  var price = chance.natural({
+    min: 1000,
+    max: 5000
+  });
+  var timeAvailable = chance.natural({
+    min: 30,
+    max: 120
+  })
+  return Product.create({
+    title: randTitle(),
+    serviceDescription: randTitle(),
+    price: price,
+    timeAvailable: timeAvailable,
+    instructor: instructor._id,
+    categories: ["ALL", chance.pick(categories)]
+  });
 }
 
-
+function randImg() {
+  var randNum = Math.floor(Math.random() * 6);
+  var picArr = ['zeke', 'scott', 'omri', 'joe', 'jimmy', 'gabe'];
+  return picArr[randNum];
+}
 
 var existingIns = []
 
-var seedInstructors = function () {
-   var instructors = [];
-   for (var i = 0; i < numIns; i++) {
-       randIns().then(function(ins){
-           instructors.push(ins);
-           existingIns = instructors;
-       })
-   };
+var seedInstructors = function() {
+  var instructors = [];
+  for (var i = 0; i < numIns; i++) {
+    randIns().then(function(ins) {
+      instructors.push(ins);
+      existingIns = instructors;
+    })
+  };
 
-   return Instructor.createAsync(instructors);
+  return Instructor.createAsync(instructors);
 
 };
 
 var existingPds = [];
 
-var seedProducts = function () {
-   var products = [];
-   for (var i = 0; i < numProducts; i++) {
-       randProduct(existingIns).then(function(prd){
-           products.push(prd);
-           existingPds = products;
-       })
-   };
+var seedProducts = function() {
+  var products = [];
+  for (var i = 0; i < numProducts; i++) {
+    randProduct(existingIns).then(function(prd) {
+      products.push(prd);
+      existingPds = products;
+    })
+  };
 
-   return Product.createAsync(products);
+  return Product.createAsync(products);
 }
-var seedUsers = function () {
+var seedUsers = function() {
   var users = [];
-      User.create({
-       lastName: "Super",
-       firstName: "User",
-       email: 'superuser@gmail.com',
-       password: '123',
-       isAdmin: true,
-       salt: User.generateSalt(),
-       cart: [],
-       pastPurchases: []
-   }).then(function(user){
+  User.create({
+    lastName: "Super",
+    firstName: "User",
+    email: 'superuser@gmail.com',
+    password: '123',
+    isAdmin: true,
+    salt: User.generateSalt(),
+    cart: [],
+    pastPurchases: []
+  }).then(function(user) {
+    users.push(user);
+  })
+  for (var i = 0; i < numUsers; i++) {
+    randUser(existingPds).then(function(user) {
       users.push(user);
-   })
-   for (var i = 0; i < numUsers; i++) {
-       randUser(existingPds).then(function(user){
-           users.push(user);
-       })
-   };
-   return User.createAsync(users);
+    })
+  };
+  return User.createAsync(users);
 
 };
 
-connectToDb.then(function () {
-   User.findAsync({}).then(function (users) {
-       if (users.length === 0) {
-           return seedInstructors();
-       } else {
-           console.log(chalk.magenta('Seems to already be instructor data, exiting!'));
-           process.kill(0);
-       }
-   }).then(function() {
-       return seedProducts();
-   }).then(function() {
-       return seedUsers();
-   }).then(function () {
-       console.log(chalk.green('Seed successful!'));
-       process.kill(0);
-   }).catch(function (err) {
-       console.error(err);
-       process.kill(1);
-   });
+connectToDb.then(function() {
+  User.findAsync({}).then(function(users) {
+    if (users.length === 0) {
+      return seedInstructors();
+    } else {
+      console.log(chalk.magenta('Seems to already be instructor data, exiting!'));
+      process.kill(0);
+    }
+  }).then(function() {
+    return seedProducts();
+  }).then(function() {
+    return seedUsers();
+  }).then(function() {
+    console.log(chalk.green('Seed successful!'));
+    process.kill(0);
+  }).catch(function(err) {
+    console.error(err);
+    process.kill(1);
+  });
 });

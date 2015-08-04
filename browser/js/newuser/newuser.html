@@ -1,52 +1,53 @@
+<div style="margin-top:110px;">
+  <div class="container-fluid">
+  	<div class="row">
+  		<div class="col-md-6">
+  <form name="newUserForm" ng-submit="submitForm(newuser)">
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6">
-<form name="newUserForm" ng-submit="submitForm(newuser)">
+  <div class="form-group">
+  	<label for="firstName">First name:</label>
+  <input type="text" id="firstName" name="firstName" ng-model="newuser.firstName" required ng-minlength="5" class="form-control">
+  <span class="error" ng-show="!!newUserForm.firstName.$error.minlength">
+      This field is too short!</span>
+  </div>
 
-<div class="form-group">
-	<label for="firstName">First name:</label>
-<input type="text" id="firstName" name="firstName" ng-model="newuser.firstName" required ng-minlength="5" class="form-control">
-<span class="error" ng-show="!!newUserForm.firstName.$error.minlength">
-    This field is too short!</span>
-</div>
+  <div class="form-group">
+  	<label for="lastName">Last name:</label>
+  <input type="text" id="lastName" name="lastName" ng-model="newuser.lastName" required class="form-control">
+  <span class="error" ng-show="!!newUserForm.lastName.$error.required">
+      This field is required!</span>
+  </div>
+  <br>
 
-<div class="form-group">
-	<label for="lastName">Last name:</label>
-<input type="text" id="lastName" name="lastName" ng-model="newuser.lastName" required class="form-control">
-<span class="error" ng-show="!!newUserForm.lastName.$error.required">
-    This field is required!</span>
-</div>
-<br>
+  <div class="form-group">
+  	<label for="email">Email Address:</label>
+  <input type="text" id="email" name="email" ng-model="newuser.email" required ng-maxlength="40" class="form-control">
+  <span class="error" ng-show="!!newUserForm.email.$error.maxlength">
+      This field is too long!</span>
+  </div>
 
-<div class="form-group">
-	<label for="email">Email Address:</label>
-<input type="text" id="email" name="email" ng-model="newuser.email" required ng-maxlength="40" class="form-control">
-<span class="error" ng-show="!!newUserForm.email.$error.maxlength">
-    This field is too long!</span>
-</div>
+  <div class="form-group">
+  	<label for="password">Password:</label>
+  <input type="password" id="password" name="password" ng-model="newuser.password" required ng-minlength="6" class="form-control">
+  <span class="error" ng-show="!!newUserForm.password.$error.maxlength">
+      This field must be at least 6 characters!</span>
+  </div>
 
-<div class="form-group">
-	<label for="password">Password:</label>
-<input type="password" id="password" name="password" ng-model="newuser.password" required ng-minlength="6" class="form-control">
-<span class="error" ng-show="!!newUserForm.password.$error.maxlength">
-    This field must be at least 6 characters!</span>
-</div>
-
-<div class="form-group">
-	<label for="isInstructor">Are you an Instructor?</label>
-<input type="checkbox" id="isInstructor" name="isInstructor" ng-model="newuser.isInstructor">
-</div>
+  <div class="form-group">
+  	<label for="isInstructor">Are you an Instructor?</label>
+  <input type="checkbox" id="isInstructor" name="isInstructor" ng-model="newuser.isInstructor">
+  </div>
 
 
-<br>
+  <br>
 
-<button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 
-</form>
-		</div>
-		<div class="col-md-6">
-			<pre>{{ newUserForm | json }} </pre>
-		</div>
-	</div>
+  </form>
+  		</div>
+  		<div class="col-md-6">
+  			<pre>{{ newUserForm | json }} </pre>
+  		</div>
+  	</div>
+  </div>
 </div>

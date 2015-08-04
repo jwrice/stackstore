@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory, TransactionFactory) {
+app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService, ProfileFactory, TransactionFactory, $http) {
 
   var User = function() {
     AuthService.getLoggedInUser()
@@ -22,5 +22,12 @@ app.controller('ProfileCtrl', function($scope, $state, $stateParams, AuthService
   }
 
   User()
+
+  $scope.submit = function() {
+    return $http.put('/api/users/' + $scope.user._id, $scope.user)
+      .then(function(res) {
+        $scope.user = res.data;
+      })
+  }
 
 })

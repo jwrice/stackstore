@@ -42,7 +42,6 @@ app.controller('ProductsController', function($scope, $rootScope, $state, Produc
 				return CartFactory.updateUser(user)
 			})
 			.then(function(user) {
-				console.log('user after updateUser', user)
 				$scope.user = user;
 				$rootScope.user = user;
 			})
@@ -68,7 +67,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('OneProductController', function($scope, ProductsFactory, $stateParams) {
+app.controller('OneProductController', function($scope, ProductsFactory, CartFactory, $stateParams) {
 	ProductsFactory.getProduct($stateParams.id).then(function(product) {
 		$scope.product = product;
 		$scope.instructor = product.instructor;
@@ -78,7 +77,16 @@ app.controller('OneProductController', function($scope, ProductsFactory, $stateP
 		}
 	})
 
-	$scope.addToCart = function() {
-		//add the product to the cart
+	$scope.submit = function(product) {
+		// console.log('product before', product)
+		ProductsFactory.addProduct($scope.user, product)
+			.then(function(user) {
+				// console.log('user.cart after addProduct', user.cart)  
+				return CartFactory.updateUser(user)
+			})
+			.then(function(user) {
+				$scope.user = user;
+				$rootScope.user = user;
+			})
 	}
 })

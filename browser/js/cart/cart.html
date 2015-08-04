@@ -1,7 +1,10 @@
-<div ng-repeat="product in user.cart">
-{{product}}
-	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
-	<button ng-click="removeFromCart(product); $event.stopPropagation()">Delete From Cart</button>
-</div>
+<div style="margin-top: 110px;">
+  <h2>Cart</h2>
+  <div ng-repeat="product in user.cart track by $index">
+  {{product}}
+  	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
+  	<button ng-click="removeFromCart(product); $event.stopPropagation()">Delete From Cart</button>
+  </div>
 
-<button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
+  <button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
+</div>
