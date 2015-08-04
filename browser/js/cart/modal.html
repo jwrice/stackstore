@@ -1,15 +1,4 @@
-<div ng-repeat="product in user.cart">
-{{product}}
-	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
-	<button ng-click="removeFromCart(product); $event.stopPropagation()">Delete From Cart</button>
-</div>
-
-<button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
-<button ng-click="open()">Go to Modal</button>
-
-
-
-<!-- <form action="/stripe" method="POST" id="payment-form">
+<form action="/stripe" method="POST" id="payment-form">
     <span class="payment-errors"></span>
 
     <div class="form-row">
@@ -36,4 +25,8 @@
     </div>
 
     <button type="submit">Submit Payment</button>
-  </form> -->
+     <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+  </form>
