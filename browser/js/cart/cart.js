@@ -34,7 +34,9 @@ app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory, Aut
     }
 
     $scope.buyAll = function() {
-        $scope.user.cart.forEach(buyAndRemove);
+        $scope.user.cart.forEach(function(product) {
+            $scope.buyAndRemove(product)
+        })
     }
 
     $scope.removeFromCart = function(product) {
