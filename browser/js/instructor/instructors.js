@@ -34,11 +34,9 @@ app.controller('InstructorCtrl', function($scope, $state, InstructorFactory) {
 
 
 app.controller('InstructorOneCtrl', function($scope, $state, InstructorFactory, ProductsFactory, $stateParams) {
-    console.log('$stateParams.instructorId', $stateParams)
 
     InstructorFactory.getOneInstructor($stateParams.instructorId)
         .then(function(instructor) {
-            console.log('res in controller', instructor)
             $scope.instructor = instructor;
         })
 

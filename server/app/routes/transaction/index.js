@@ -56,14 +56,6 @@ router.post("/:userId", function(req, res, next) {
       })
     })
     .then(function(transaction) {
-      // routeUser.pastPurchases.push(transaction._id)
-      // console.log('return transaction is:', transaction)
-      // console.log('routeUser with new past Purchases:', routeUser)
-      // return User.findByIdAndUpdate(transaction.user, routeUser, {new: true})
-      // .exec()
-      // .then(function(user){
-      //     res.json(user)
-      // })
       res.json(transaction)
       next()
     })
