@@ -12,16 +12,13 @@ app.config(function($stateProvider) {
         })
 });
 
-app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory) {
+app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory, AuthService) {
 
-    CartFactory.getUser().then(function(user) {
-        $scope.user = user
+
+    AuthService.getLoggedInUser().then(function(user) {
+        console.log(user);
+        return $scope.user = user;
     })
-
-    CartFactory.getCart($scope.user._id)
-        .then(function(user) {
-            $scope.user = user
-        })
 
     $scope.buyAndRemove = function(product) {
         CartFactory.buyProduct($scope.user, product)
@@ -37,19 +34,7 @@ app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory) {
     }
 
     $scope.buyAll = function() {
-
-        var newTransactionArr = []
-        $scope.user.cart.forEach(function(product) {
-                newTransactionArr.push(product._id);
-            })
-            // console.log('newTransactionArr', newTransactionArr)
-        $scope.user.pastPurchases = $scope.user.pastPurchases.concat(newTransactionArr);
-        $scope.user.cart = [];
-        // console.log('pastPurchases after', $scope.user.pastPurchases);
-        CartFactory.updateUser($scope.user)
-            .then(function(user) {
-                $rootScope.user = user
-            })
+        $scope.user.cart.forEach(buyAndRemove);
     }
 
     $scope.removeFromCart = function(product) {

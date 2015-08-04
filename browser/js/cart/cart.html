@@ -1,4 +1,4 @@
-<div ng-repeat="product in user.cart">
+<div ng-repeat="product in user.cart track by $index">
 {{product}}
 	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
 	<button ng-click="removeFromCart(product); $event.stopPropagation()">Delete From Cart</button>
