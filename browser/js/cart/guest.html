@@ -1,5 +1,7 @@
-<div ng-repeat="product in retrieve()">
-{{product}}
-<button ng-click="delete(product._id)">Delete From Cart</button>
+<div style="margin-top:110px;">
+  <div ng-repeat="product in retrieve()">
+  {{product}}
+  <button ng-click="delete(product._id)">Delete From Cart</button>
+  </div>
+  <button ng-click="buyAll()">Buy all</button>
 </div>
-<button ng-click="buyAll()">Buy all</button>

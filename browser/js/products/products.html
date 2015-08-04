@@ -1,12 +1,17 @@
-<h1>Products</h1>
-<div style="text-align:center">
-	<label>Category:</label>    <select ng-model="category" ng-change="changed(category)">
-		<option value="ALL">ALL</option>
-		<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
-	</select>     
-	<label>Instructor:</label>    <select ng-model="insIds" ng-change="choose(insIds)">
-		<option value="ALL">ALL</option>
-		<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
-	</select>
+<div style="margin-top: 110px;">
+  <h1>Products</h1>
+  <div style="text-align:center;">
+  	<label>Category:</label>    
+    <select ng-model="category" ng-change="changed(category)" class="form-control" id="sel1" style="width:200px; display:inline-block;">
+  		<option value="ALL">ALL</option>
+  		<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
+  	</select>     
+  	<label>Instructor:</label>    
+    <select ng-model="insIds" ng-change="choose(insIds)" class="form-control"id="sel1" style="width:200px; display: inline-block;">
+  		<option value="ALL">ALL</option>
+  		<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
+  	</select>
+  </div>
+  <product ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))" ng-click="viewProduct(product._id)"></product>
 </div>
-<product ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))" ng-click="viewProduct(product._id)"></product>
+ 

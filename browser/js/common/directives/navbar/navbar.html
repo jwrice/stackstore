@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top" style="background-color: #ccc; ">
+<nav class="navbar navbar-fixed-top" style="background-color: #ccc; ">
     <div class="container">
         <div class="navbar-header">
             <fullstack-logo></fullstack-logo>
@@ -11,13 +11,16 @@
                 <a ui-sref="guestCart">Guest Cart</a> 
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <button ng-show="!user" ui-sref="newuser" class="btn login-button">Create Account</button>
+        <div ng-show="!user">
+            <button ui-sref="login" class="btn login-button">Login</button>
+            <button ui-sref="newuser" class="btn login-button">Create Account</button>
+        </div>
+
 
         <div ng-show="!!user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
+            <span>Welcome, {{ user.firstName }}!</span>
+            <button ui-sref="profile" class="btn login-button">My Profile</button>
             <a ng-click="logout()">Logout</a>
         </div>
-        <button ui-sref="profile" ng-show="user" class="btn login-button">My Profile</button>
     </div>
 </nav>

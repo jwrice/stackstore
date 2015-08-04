@@ -1,18 +1,25 @@
-
-<h3>{{user.firstName}}'s Profile:</h3>
-<div class="row">
-	<div class="col-md-2 lead">First Name:</div>
-	<div class="col-md-10 lead">{{user.firstName}}</div>
-</div>
-<div class="row">
-	<div class="col-md-2 lead">Last Name:</div>
-	<div class="col-md-10 lead">{{user.lastName}}</div>
-</div>
-<div class="row">
-	<div class="col-md-2 lead">Email:</div>
-	<div class="col-md-10 lead">{{user.email}}</div>
-</div>
-<h3>Your Past Purchases</h3>
-<div ng-repeat="trans in user.pastPurchases">
-	<trans transaction="trans" instructor="trans.product.instructor" product="trans.product"></trans>
+<div style="margin-top: 110px;">
+  <h3>{{user.firstName}}'s Profile:</h3>
+  <form name="editProduct">
+    <div style="display: inline-block;">
+      <label>First Name:  </label>
+      <br>
+      <label>Last Name:  </label>
+      <br>
+      <label>Email:  </label>
+    </div>
+    <div style="display: inline-block;">
+      <input type="text" ng-model="user.firstName">
+      <br>
+      <input type="text" ng-model="user.lastName">
+      <br>
+      <input type="text" ng-model="user.email">
+    </div>
+    <br>
+    <button ng-click="submit()">Save Changes</button>
+  </form>
+  <h3>Your Past Purchases</h3>
+  <div ng-repeat="trans in user.pastPurchases">
+  	<trans transaction="trans" instructor="trans.product.instructor" product="trans.product"></trans>
+  </div>
 </div>
