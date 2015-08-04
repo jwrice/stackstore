@@ -54,6 +54,10 @@ app.controller('ProductsController', function($scope, $rootScope, $state, Produc
 		});
 	}
 
+	$scope.getTimes=function(n){
+    	 return new Array(n);
+	};
+
 	$scope.insIds = "ALL";
 	$scope.category = "ALL";
 });

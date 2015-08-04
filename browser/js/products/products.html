@@ -1,20 +1,24 @@
 <div style="margin-top: 110px">
 	<h4> </h4>
-	<div style="text-align:center">
-		<button ng-click="changed(cat)" ng-repeat="cat in cats" class="inline-block waves-effect waves-light btn grey">{{cat}}</button>
-		<button ng-click="changed()" class="waves-effect waves-light btn grey">RESET</button>
-		<br>
-		<select ng-model="category" ng-change="changed(category)">
-			<option value="ALL">ALL</option>
-			<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
-		</select>     
-		<br>
-		<!-- <button ng-model="insIds" ng-click="choose(instr._id)" ng-repeat="instr in instructors" value="{{instr._id}}" class="waves-effect waves-light btn grey">{{instr.fullName.split(" ")[0]}}</button>	 -->
-		<select ng-model="insIds" ng-change="choose(insIds)">
-			<option value="ALL">ALL</option>
-			<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
-		</select>
-	</dwiv>
+	<div class="row">
+	    <div class="col s12">
+			<div style="text-align:center">
+				<button ng-click="changed(cat)" ng-repeat="cat in cats" class="inline-block waves-effect waves-light btn grey">{{cat}}</button>
+				<button ng-click="changed()" class="waves-effect waves-light btn grey">RESET</button>
+				<br>
+				<select ng-model="category" ng-change="changed(category)">
+					<option value="ALL">ALL</option>
+					<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
+				</select>     
+				<br>
+				<!-- <button ng-model="insIds" ng-click="choose(instr._id)" ng-repeat="instr in instructors" value="{{instr._id}}" class="waves-effect waves-light btn grey">{{instr.fullName.split(" ")[0]}}</button>	 -->
+				<select ng-model="insIds" ng-change="choose(insIds)">
+					<option value="ALL">ALL</option>
+					<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
+				</select>
+			</div>
+		</div>
+	</div>
 	<div class="row">
 	    <div class="col s12 cards-container">
 			<div style="text-align:center">
