@@ -1,9 +1,25 @@
-<div id="instructorInfo" style="margin: 10px 10px; background-color: #bbb; border-radius:20px; padding:20px 20px;">
-  <img id="profilePic" src="/imgs/jimmy.jpg" style="width:130px; height:130px;">
+<div class="card z-index-2">
+  <div class="image">
+    <img src="/imgs/{{instructor.picture}}.jpg">
+    <span class="title">{{instructor.fullName}}</span>
+  </div>
+  <!-- <div class="content">
+    <p>{{instructor.fullName.split(" ")[0]}}'s Products</p>
+  </div> -->
+  <br>
+  	<div style="text-align:center">
+    <a href='#'>Rating from {{instructor.rating.numOfRat}} students:</a>
+</div>
+    <img src="/imgs/{{instructor.rating.ratingsAverage}}Stars.png" style="margin:auto; display: block;
+    width: 80% !important;
+    height: auto !important"></img>
+
+<!-- <div id="instructorInfo" style="margin: 10px 10px; background-color: #bbb; border-radius:20px; padding:20px 20px; height:170px;">
+  <img id="profilePic" src="/imgs/{{instructor.picture}}.jpg" style="width:130px; height:130px; float:left;">
   <img id="stars" src="/imgs/{{rating}}Stars.png" style="float: right;">
-  <div style="display:inline-block; margin:10px 10px;">
+  <div style="display:inline-block; margin:10px 10px; float: left;">
     <h2 style="display:inline-block;">{{instructor.fullName}}</h2>
     <br> 
     <h4 style="display:inline-block;">{{instructor.email}}</h4>
-  </div>  
+  </div>   -->
 </div>

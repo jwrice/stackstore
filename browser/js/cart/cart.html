@@ -1,14 +1,3 @@
-<div ng-repeat="product in user.cart">
-{{product}}
-	<button ng-click="buyAndRemove(product); $event.stopPropagation()">Buy Me</button>
-	<button ng-click="removeFromCart(product); $event.stopPropagation()">Delete From Cart</button>
-</div>
-
-<button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
-<button ng-click="open()">Go to Modal</button>
-
-
-
 <!-- <form action="/stripe" method="POST" id="payment-form">
     <span class="payment-errors"></span>
 
@@ -37,3 +26,31 @@
 
     <button type="submit">Submit Payment</button>
   </form> -->
+<div style="margin-top: 110px;">
+    <h2>Cart</h2>   
+    <button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
+    <div ng-repeat="product in user.cart track by $index">
+      <div id="productInfo" style="background-color: #ddd; border-radius:20px; padding: 20px 20px; margin-top:20px;">
+      <h1 style="display:inline-block;">{{product.title}}</h1>
+      <div style="float:right;padding-top: 50px">
+  <!--      <button id="addToCart" ng-click="submit(product)" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button> -->
+            <button ng-click="buyAndRemove(product)" style="float:right; font-size:1.5em; margin-bottom:10px;">Buy Me</button>
+          <button ng-click="removeFromCart(product); $event.stopPropagation()" style="float:right; font-size:1.5em; margin-bottom:10px;">Delete From Cart</button>
+        <br>
+        <h2>Price: ${{product.price/100}} </h2>
+      </div>
+      <h3>{{product.serviceDescription}}</h3>
+      <h4>Tags:</h4>
+      <h5>
+        <a ng-repeat="cat in product.categories">{{cat}} </a>
+      </h5>
+      <h3>Time:   {{Math.floor(product.timeAvailable/60)}}h {{product.timeAvailable%60}}m </h3>
+      <br>
+      <instructor instructor="product.instructor"></instructor>
+    </div>
+    </div>
+</div>
+
+
+<button ng-click="buyAll(); $event.stopPropagation()">Buy All</button>
+<button ng-click="open()">Go to Modal</button>
