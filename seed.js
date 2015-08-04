@@ -62,17 +62,39 @@ function randIns() {
 }
 
 function randTitle() {
-  var numWords = chance.natural({
-    min: 1,
-    max: 8
-  });
-  return chance.sentence({
-      words: numWords
-    })
-    .replace(/\b\w/g, function(m) {
-      return m.toUpperCase();
-    })
-    .slice(0, -1);
+  
+  var choiceTitles = [
+  'Get Angular Skills, Son!',
+  'Dont Sweat SQL',
+  '5 JS Libraries for Abstracting All Complexity Out of Your Entire Life',
+  'Browsing Youtube for Dummies',
+  'The Browser URL Bar: Challenges and Solutions',
+  'Uncovering The Keyboard: How to Capitalize, Underline, and Bold Text',
+  'Brackets and Parentheses: What are they, anyway?', '"Restart" Versus "Shutdown" - What You Dont Know Could Hurt You',
+  'Is Your Computer Running Slowly? Welcome to MacKeeper 101',
+  '']
+  
+  var titleIndex = Math.floor(Math.random() * (choiceTitles.length))
+
+  return choiceTitles[titleIndex]
+
+}
+
+function randDescription() {
+
+  var choiceDescriptions = ['Lorem ipsum dolor sit amet, error iusto quidam qui ex. No vis nostrum laboramus. Nibh eruditi maluisset eam ea, ea eos solum erant.',
+  'ix invenire mnesarchum dissentiet, ea per verear oblique. Sea ad dicam invenire, purto omnes electram id sed, audiam saperet mentitum',
+  'Sed dicat tation urbanitas ea, liber labitur cum in, ullum definiebas ad sed. Id amet exerci graeci mea, dicit dolor possit eos te.',
+  'Cu tibique corpora scripserit pro, cu verterem imperdiet qui, sea dicunt tincidunt ne. Iisque feugait commune ex vis. Delenit debitis ius in',
+  'Vix ut wisi causae laoreet, ex ius deleniti invidunt quaestio. Facilisis euripidis disputando no mei. Dicta salutatus cu nec. Usu ea latine euism',
+  'utinam equidem accusamus ne duo, amet commodo disputationi est te. Honestatis scriptorem mel te, usu ex minim vocent om',
+  'ius deleniti invidunt quaestio. Facilisis euripidis disputando no mei. Dicta salutatus cu nec. Usu ea latine euismod perpetua, nam meliore'
+  ]
+  
+  var descriptionIndex = Math.floor(Math.random() * (choiceDescriptions.length))
+
+  return choiceDescriptions[descriptionIndex]
+  
 }
 
 function randProduct(allIns) {
@@ -87,7 +109,7 @@ function randProduct(allIns) {
   })
   return Product.create({
     title: randTitle(),
-    serviceDescription: randTitle(),
+    serviceDescription: randDescription(),
     price: price,
     timeAvailable: timeAvailable,
     instructor: instructor._id,

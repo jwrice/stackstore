@@ -10,8 +10,7 @@ var Auth = require('../auth.middleware.js')
 
 router.param('userId', function(req, res, next, userId) {
 	User.findById(userId)
-		.populate('cart')
-		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
+		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor cart cart.instructor')
 		.exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
