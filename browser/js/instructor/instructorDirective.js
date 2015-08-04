@@ -6,7 +6,6 @@ app.directive("instructor", function() {
       instructor: "="
     },
     link: function(scope) {
-      console.log("instructor:", scope.instructor);
       scope.rating = Math.round(scope.instructor.rating.ratingsAverage);
     }
   }
