@@ -38,6 +38,7 @@ app.controller('InstructorOneCtrl', function($scope, $state, InstructorFactory, 
     InstructorFactory.getOneInstructor($stateParams.instructorId)
         .then(function(instructor) {
             $scope.instructor = instructor;
+            $scope.rating = Math.round(instructor.rating.ratingsAverage);
         })
 
     ProductsFactory.getInstructorProducts($stateParams.instructorId)

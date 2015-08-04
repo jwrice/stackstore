@@ -15,7 +15,8 @@ var Instructor = new schema({
   rating: {
     numOfRat: Number,
     ratingsAverage: Number
-  }
+  },
+  picture: String
 })
 
 

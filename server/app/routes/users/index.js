@@ -10,8 +10,7 @@ var Auth = require('../auth.middleware.js')
 
 router.param('userId', function(req, res, next, userId) {
 	User.findById(userId)
-		.populate('cart')
-		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor')
+		.deepPopulate('pastPurchases pastPurchases.product pastPurchases.product.instructor cart cart.instructor')
 		.exec()
 		.then(function(user) {
 			if (!user) throw new Error("user not found");
@@ -54,11 +53,15 @@ router.post('/', function(req, res, next) {
 
 
 // Auth authentication here
-router.use('/:userId', Auth.isAuthenticated, function (req, res, next) {
-	if (String(req.currentUser._id) === String(req.user._id)) {
-		next()}
-	else Auth.isAdmin(req, res, next);
-});
+// router.use('/:userId', Auth.isAuthenticated, function (req, res, next) {
+// 	if (req.currentUser._id == req.user._id) next();
+// 	else Auth.isAdmin(req, res, next);
+// });
+// router.use('/:userId', Auth.isAuthenticated, function (req, res, next) {
+// 	if (String(req.currentUser._id) === String(req.user._id)) {
+// 		next()}
+// 	else Auth.isAdmin(req, res, next);
+// });
 
 
 // adding/deleting products to the cart

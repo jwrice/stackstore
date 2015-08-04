@@ -12,16 +12,16 @@ app.config(function($stateProvider) {
         })
 });
 
-app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory) {
+app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory, AuthService) {
 
-    CartFactory.getUser().then(function(user) {
-        $scope.user = user
-    })
 
-    CartFactory.getCart($scope.user._id)
-        .then(function(user) {
-            $scope.user = user
+    AuthService.getLoggedInUser(true).then(function(user) {
+        console.log(user);
+        CartFactory.getUser(user)
+        .then(function(user){
+            return $scope.user = user;    
         })
+    })
 
     $scope.buyAndRemove = function(product) {
         CartFactory.buyProduct($scope.user, product)
@@ -37,7 +37,7 @@ app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory) {
     }
 
     $scope.buyAll = function() {
-        $scope.user.cart.forEach(function (product) {
+        $scope.user.cart.forEach(function(product) {
             $scope.buyAndRemove(product)
         })
     }
