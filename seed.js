@@ -68,11 +68,13 @@ function randTitle() {
   'Dont Sweat SQL',
   '5 JS Libraries for Abstracting All Complexity Out of Your Entire Life',
   'Browsing Youtube for Dummies',
-  'The Browser URL Bar: Challenges and Solutions',
+  'Bookmarking Sites: Challenges and Solutions',
   'Uncovering The Keyboard: How to Capitalize, Underline, and Bold Text',
   'Brackets and Parentheses: What are they, anyway?', '"Restart" Versus "Shutdown" - What You Dont Know Could Hurt You',
   'Is Your Computer Running Slowly? Welcome to MacKeeper 101',
-  '']
+  'Cut, Copy, Paste - A Power Users Guide',
+  'Whiteboard Erasers: A Species on the Verge of Extinction',
+  'Addition, Subtraction, and other Mysteries of the Universe']
   
   var titleIndex = Math.floor(Math.random() * (choiceTitles.length))
 
