@@ -16,7 +16,26 @@ app.use(bodyParser.json());
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
-
+app.post('/stripe', function(req, res){
+  console.log(req.body);
+   var stripeToken = req.body.stripeToken;
+   var charge = stripe.charges.create({
+     amount: 1000, // amount in cents, again
+     currency: "usd",
+     card: stripeToken,
+     description: "payinguser@example.com"
+   }, function(err, charge) {
+     if (err && err.type === 'StripeCardError') {
+       console.log("CARD DECLINED");
+       res.send('error')
+     }
+     else {
+         console.log("accepted")
+         res.send('ok')
+     }
+   });
+  console.log("Charge",charge);
+});
 
 /*
  This middleware will catch any URLs resembling a file extension
