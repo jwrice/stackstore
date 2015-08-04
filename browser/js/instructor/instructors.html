@@ -1,4 +1,4 @@
- <div style="text-align:left margin-top: 110px">
+ <div style="text-align:left; margin-top: 110px">
  	<br>
   <button style="border:1px solid black; border-radius: 0px; background-color:#ddd" ng-click="toggleArrow()">
     <label>Stars</label>
@@ -6,8 +6,8 @@
   </button>
   <br>
   <div style="text-align:center">
-  <a ui-sref="singleInstructor({instructorId: instructor._id})" ng-repeat="instructor in instructors">
-    <instructor instructor="instructor"></instructor>
-  </a>
-</div>
+    <a ui-sref="singleInstructor({instructorId: instructor._id})" ng-repeat="instructor in instructors">
+      <instructor instructor="instructor"></instructor>
+    </a>
+  </div>
 </div>

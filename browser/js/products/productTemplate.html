@@ -9,7 +9,7 @@
               <p>Description: {{product.serviceDescription.substring(0,20)}}</p>
             </div>
             <div class="card-action">
-              <a ng-show="user" style="cursor: pointer" ng-click="submit(product)">Add This to My Cart</a>
-              <a ng-show="!user" style="cursor: pointer" ng-click="submit(product)">Add to Guest Cart</a>
+              <a ng-show="user" style="cursor: pointer" ng-click="submit(product); $event.stopPropagation()">Add This to My Cart</a>
+              <a ng-show="!user" style="cursor: pointer" ng-click="submit(product); $event.stopPropagation()">Add to Guest Cart</a>
             </div>
           </div>

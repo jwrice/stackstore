@@ -3,7 +3,7 @@ app.factory('CartFactory', function($http, AuthService) {
 
 		buyProduct: function(user, product) {
 			// (db) push to transaction
-			console.log('product', product)
+			console.log('product', product, 'user', user)
 			var user = user;
 			return $http.post('api/transaction/' + user._id, product)
 				.then(function(res) {

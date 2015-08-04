@@ -11,16 +11,16 @@
                 <a ui-sref="guestCart">Guest Cart</a> 
             </li>
         </ul>
+
+        <div ng-show="!!user" class="welcome">
+            <button ui-sref="profile" class="btn login-button">My Profile</button>
+            <button ng-click="logout()" style="float:right" ng-if="user" class="btn login-button">Logout</button>
+        </div>
+
         <div ng-show="!user">
             <button ui-sref="login" class="btn login-button">Login</button>
             <button ui-sref="newuser" class="btn login-button">Create Account</button>
         </div>
 
-
-        <div ng-show="!!user" class="welcome">
-            <span>Welcome, {{ user.firstName }}!</span>
-            <button ui-sref="profile" class="btn login-button">My Profile</button>
-            <a ng-click="logout()">Logout</a>
-        </div>
     </div>
 </nav>
