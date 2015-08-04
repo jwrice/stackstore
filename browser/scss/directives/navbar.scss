@@ -1,4 +1,4 @@
-navbar {
+ navbar {
 
   display: block;
   background: #ccc;
@@ -39,18 +39,23 @@ navbar {
   .login-button {
     float: right;
     border: 1px solid black;
-    margin-top: 10px;
     background: none;
     outline: none !important;
   }
 
-  .welcome {
+  .welcome{
     float: right;
-    margin-top: 12px;
+    margin-top:8px;
     span {
+      position:relative;
+      top:5px;
       color: white;
+      font-size: 1.25em;
     }
     a {
+      position:relative;
+      top:5px;
+      margin: 5px 5px;
       color: #f30046;
       cursor: pointer;
     }

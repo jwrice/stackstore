@@ -1,12 +1,31 @@
-<h1>Products</h1>
-<div style="text-align:center">
-	<label>Category:</label>    <select ng-model="category" ng-change="changed(category)">
-		<option value="ALL">ALL</option>
-		<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
-	</select>     
-	<label>Instructor:</label>    <select ng-model="insIds" ng-change="choose(insIds)">
-		<option value="ALL">ALL</option>
-		<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
-	</select>
-</div>
-<product ng-repeat="product in products" ng-show="(product.categories.indexOf(category)>(-1) && insIds === product.instructor._id)|| (category==='ALL' && insIds === product.instructor._id) || (insIds === 'ALL' && product.categories.indexOf(category)>(-1) || (category==='ALL' && insIds === 'ALL'))" ng-click="viewProduct(product._id)"></product>
+<div style="margin-top: 110px">
+	<h4> </h4>
+	<div style="text-align:center">
+		<button ng-click="changed(cat)" ng-repeat="cat in cats" class="inline-block waves-effect waves-light btn grey">{{cat}}</button>
+		<button ng-click="changed()" class="waves-effect waves-light btn grey">RESET</button>
+		<br>
+		<select ng-model="category" ng-change="changed(category)">
+			<option value="ALL">ALL</option>
+			<option ng-repeat="cat in cats" value="{{ cat }}">{{ cat }}<option>
+		</select>     
+		<br>
+		<!-- <button ng-model="insIds" ng-click="choose(instr._id)" ng-repeat="instr in instructors" value="{{instr._id}}" class="waves-effect waves-light btn grey">{{instr.fullName.split(" ")[0]}}</button>	 -->
+		<select ng-model="insIds" ng-change="choose(insIds)">
+			<option value="ALL">ALL</option>
+			<option ng-repeat="instr in instructors" value="{{ instr._id }}">{{ instr.fullName }}</option>
+		</select>
+	</dwiv>
+	<div class="row">
+	    <div class="col s12 cards-container">
+			<div style="text-align:center">
+				<product ng-repeat="product in products"
+					ng-show="(product.categories.indexOf(category)>(-1)
+					&& insIds === product.instructor._id)|| (category==='ALL' 
+					&& insIds === product.instructor._id) || (insIds === 'ALL' 
+					&& product.categories.indexOf(category)>(-1) || (category==='ALL' 
+					&& insIds === 'ALL'))" ng-click="viewProduct(product._id)"
+				></product>
+			</div>
+		</div>
+	</div>
+</div>	

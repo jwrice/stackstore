@@ -3,7 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var stripe = require("stripe")("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+var stripe = require("stripe")('sk_test_Rzyn7aDOIOuRfRt1F22n8UpM')
 module.exports = app;
 
 // Pass our express application pipeline into the configuration
