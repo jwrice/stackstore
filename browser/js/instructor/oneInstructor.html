@@ -1,13 +1,30 @@
-<div id="instructorInfo" style="margin: 10px 10px; background-color: #bbb; border-radius:20px; padding:20px 20px;">
-  <img id="profilePic" src="/imgs/jimmy.jpg" style="width:200px; height:200px; padding: 20px 20px;">
-  <img id="stars" src="/imgs/{{instructor.rating.ratingsAverage}}Stars.png" style="float: right; padding: 20px 20px;">
+<div id="instructorInfo" style="margin-top: 110px; background-color: #bbb; border-radius:20px; padding:20px 20px;">
+  <img id="profilePic" src="/imgs/{{instructor.picture}}.jpg" style="width:200px; height:200px; padding: 20px 20px;">
+  <img id="stars" src="/imgs/{{rating}}Stars.png" style="float: right; padding: 20px 20px;">
   <div style="display:inline-block;">
     <h2 style="display:inline-block;">{{instructor.fullName}}</h2>
     <br>
     <h4 style="display:inline-block;">{{instructor.email}}</h4>
-  </div>  
-
+  </div>
+  <h2 style="padding-left:20px;">Offered Products:</h2>
   <product ng-repeat="product in products"></product>
+</div>
+
+
+  <div class="container">
+  <div style="row">
+    <div style="col s2 text-align:center display:inline-block;">
+      <h3 style="text-align:center;">{{instructor.fullName}}</h3>
+      <br>
+      <h4 style="text-align:center;">{{instructor.email}}</h4>
+      <br>
+      <img id="profilePic" src="/imgs/jimmy.jpg" style="width:300px; height:300px; padding: 20px 20px;">
+      <br>
+      <img id="stars" src="/imgs/{{instructor.rating.ratingsAverage}}Stars.png" style="padding: 20px 20px;">
+      <br>
+    </div>  
+    <div style-"col s6">
+      <product ng-repeat="product in products"></product>
 <!--    <h2 style="display:inline-block;">{{product.title}}</h2>
    <div style="float:right; padding-top: 50px">
      <button id="addToCart" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button>
@@ -20,4 +37,6 @@
     <h4>{{product.serviceDescription}}</h4>
     <h4>Time:   {{time.hours}}h {{time.minutes}}m </h4>
   </div> -->
+    </div>
+  </div>
 </div>

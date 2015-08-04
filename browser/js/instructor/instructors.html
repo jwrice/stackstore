@@ -1,10 +1,13 @@
- <div>
-  <h1>Instructors:</h1>
-  <button style="border:1px solid black; border-radius: 0px; background-color:#ddd" ng-click="toggleArrow()">
+ <div style="text-align:left">
+ 	<br>
+  <button style="text-align:left border:1px solid black; border-radius: 0px; background-color:#ddd" ng-click="toggleArrow()">
     <label>Stars</label>
     <img id="arrow" src="/imgs/{{arrowDir}}Arrow.png">
   </button>
-  <a ng-repeat="instructor in instructors" ui-sref="singleInstructor({instructorId: instructor._id})">
+  <br>
+  <div style="text-align:center">
+  <a ui-sref="singleInstructor({instructorId: instructor._id})" ng-repeat="instructor in instructors">
     <instructor instructor="instructor"></instructor>
   </a>
+</div>
 </div>

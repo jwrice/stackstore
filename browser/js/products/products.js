@@ -11,6 +11,7 @@ app.controller('ProductsController', function($scope, $rootScope, $state, Produc
 	// console.log('user.cart', $scope.user.cart)
 	$scope.cats = ["Python", "Java", "JavaScript", "Ruby", "Objective-C"];
 	$scope.changed = function(category) {
+		if (!category) $scope.category = "ALL"
 		$scope.category = category;
 	}
 	ProductsFactory.getProducts().then(function(products) {
@@ -22,6 +23,7 @@ app.controller('ProductsController', function($scope, $rootScope, $state, Produc
 	})
 
 	$scope.choose = function(ins) {
+		if (!ins) $scope.insIds = "ALL"
 		$scope.insIds = ins;
 	}
 
@@ -33,7 +35,7 @@ app.controller('ProductsController', function($scope, $rootScope, $state, Produc
 	}
 
 	$scope.submit = function(product) {
-		// console.log('product before', product)
+		console.log('product before', product)
 		ProductsFactory.addProduct($scope.user, product)
 			.then(function(user) {
 				// console.log('user.cart after addProduct', user.cart)  
