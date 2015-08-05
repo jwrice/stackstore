@@ -26,6 +26,7 @@
       </label>
       <span> / </span>
       <input type="text" size="4" data-stripe="exp-year" ng-model="card.exp_year"/>
+      <p style="display:inline; color:red" ng-show="invalidCard">Invalid Card Information</p>
     </div>
      <div class="modal-footer">
             <button class="btn btn-primary" type="submit">Confirm Payment</button>
