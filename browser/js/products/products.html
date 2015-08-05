@@ -4,7 +4,7 @@
 	    <div class="col s12">
 			<div style="text-align:center">
 				<button ng-click="changed(cat)" ng-repeat="cat in cats" class="inline-block waves-effect waves-light btn grey">{{cat}}</button>
-				<button ng-click="changed()" class="waves-effect waves-light btn grey">RESET</button>
+				<button ng-click="changed('ALL')" class="waves-effect waves-light btn grey">RESET</button>
 				<br>
 				<select ng-model="category" ng-change="changed(category)">
 					<option value="ALL">ALL</option>
@@ -23,11 +23,7 @@
 	    <div class="col s12 cards-container">
 			<div style="text-align:center">
 				<product ng-repeat="product in products"
-					ng-show="(product.categories.indexOf(category)>(-1)
-					&& insIds === product.instructor._id)|| (category==='ALL' 
-					&& insIds === product.instructor._id) || (insIds === 'ALL' 
-					&& product.categories.indexOf(category)>(-1) || (category==='ALL' 
-					&& insIds === 'ALL'))" ng-click="viewProduct(product._id)"
+					ng-show="(product.categories[1]===category) || (category == 'ALL')" ng-click="viewProduct(product._id)"
 				></product>
 			</div>
 		</div>
