@@ -26,7 +26,7 @@ app.post('/stripe', function(req, res){
      card: stripeToken,
      description: "payinguser@example.com"
    }, function(err, charge) {
-     if (err && err.type === 'StripeCardError') {
+     if ((err && err.type === 'StripeCardError') || !stripeToken) {
        console.log("CARD DECLINED");
        res.send('error')
      }

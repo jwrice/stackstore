@@ -101,6 +101,8 @@ app.controller('CartCtrl', function($scope, $state, $rootScope, CartFactory, $ht
 
 app.controller('ModalInstanceCtrl', function($scope, $modalInstance, $state, $http) {
 
+    $scope.invalidCard = false;
+
     $scope.card = {
         number: null,
         cvc: null,
@@ -115,9 +117,16 @@ app.controller('ModalInstanceCtrl', function($scope, $modalInstance, $state, $ht
         Stripe.card.createToken(cardInfo, function (status, response) {
             console.log('response', response)
             return $http.post('/stripe', response)
-            .then(function () {
-                $modalInstance.close();
-                $state.go('cart')
+            .then(function (res) {
+                if (res.data === "error") {
+                    console.log('error bitch')
+                    $scope.invalidCard = true;
+                }
+                else {
+                    $scope.invalidCard = false;
+                    $modalInstance.close();
+                    $state.go('cart')
+                }
             })
         })
     }
