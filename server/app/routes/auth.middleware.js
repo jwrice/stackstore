@@ -12,12 +12,12 @@ Auth.isAuthenticated = function (req, res, next) {
 	};
 };
 
-// Auth.isAdmin = function (req, res, next, err) {
-// 	if (req.user && req.user.isAdmin) next();
-// 	else{
-// 		throw "You are too weak!";
-// 		next();
-// 	};
-// }
+Auth.isAdmin = function (req, res, next, err) {
+	if (req.user && req.user.isAdmin) next();
+	else{
+		throw "You are too weak!";
+		next();
+	};
+}
 
 module.exports = Auth;
