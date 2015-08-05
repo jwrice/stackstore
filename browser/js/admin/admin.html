@@ -2,27 +2,27 @@
 <div class="users col-lg-4">
 	<h3>Users</h3>
 	<div ng-repeat="user in users">
-		{{user.firstName+" "+user.lastName}}
-		<button ng-click="deleteUser(user)">Delete</button>
-		<button ui-sref="editUser({userId: user._id})">Edit</button>
+		<h5>{{user.firstName+" "+user.lastName}}</h5>
+		<button class="inline-block waves-effect waves-light btn grey" ng-click="deleteUser(user)">Delete</button>
+		<button class="inline-block waves-effect waves-light btn grey" ui-sref="editUser({userId: user._id})">Edit</button>
 	</div>
 </div>
 
 <div class="instructors col-lg-4">
 	<h3>Instructors</h3>
 	<div ng-repeat="instructor in instructors">
-		{{instructor.fullName}}
-		<button ng-click="deleteIns(instructor)">Delete</button>
-		<button ui-sref="editIns({instructorId: instructor._id})">Edit</button>
+		<h5>{{instructor.fullName}}</h5>
+		<button class="inline-block waves-effect waves-light btn grey" ng-click="deleteIns(instructor)">Delete</button>
+		<button class="inline-block waves-effect waves-light btn grey" ui-sref="editIns({instructorId: instructor._id})">Edit</button>
 	</div>
 </div>
 
 <div class="products col-lg-4">
 	<h3>Products</h3>
 	<div ng-repeat="product in products">
-		{{product.title}}
-		<button ng-click="deleteProduct(product)">Delete</button>
-		<button ui-sref="editProduct({productId: product._id})">Edit</button>
+		<h5>{{product.title.slice(0,14)+"..."}}</h5>
+		<button class="inline-block waves-effect waves-light btn grey" ng-click="deleteProduct(product)">Delete</button>
+		<button class="inline-block waves-effect waves-light btn grey" ui-sref="editProduct({productId: product._id})">Edit</button>
 	</div>
 </div>
 </div>

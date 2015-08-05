@@ -1,13 +1,13 @@
 <div style="margin-top: 110px;">
     <h2>Cart</h2>   
-    <button ng-click="open(); buyAll(); $event.stopPropagation()">Buy All</button>
+    <button ng-click="open(); buyAll(); $event.stopPropagation()" class="inline-block waves-effect waves-light btn grey">Buy All</button>
     <div ng-repeat="product in user.cart track by $index">
       <div id="productInfo" style="background-color: #ddd; border-radius:20px; padding: 20px 20px; margin-top:20px;">
       <h1 style="display:inline-block;">{{product.title}}</h1>
       <div style="float:right;padding-top: 50px">
   <!--      <button id="addToCart" ng-click="submit(product)" style="float:right; font-size:1.5em; margin-bottom:10px;">Add to Cart</button> -->
-            <button ng-click="open(); buyAndRemove(product)" style="float:right; font-size:1.5em; margin-bottom:10px">Buy Me</button>
-          <button ng-click="removeFromCart(product); $event.stopPropagation()" style="float:right; font-size:1.5em; margin-bottom:10px;">Delete From Cart</button>
+            <button ng-click="open(); buyAndRemove(product)" class="inline-block waves-effect waves-light btn grey" style="float:right; font-size:1.5em; margin-bottom:10px">Buy Me</button>
+          <button ng-click="removeFromCart(product); $event.stopPropagation()" class="inline-block waves-effect waves-light btn grey" style="float:right; font-size:1.5em; margin-bottom:10px;">Delete From Cart</button>
         <br>
         <h2>Price: ${{product.price/100}} </h2>
       </div>
